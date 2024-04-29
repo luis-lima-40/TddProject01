@@ -1,17 +1,33 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 
 namespace TddProject.Domain
 {
     public class Cachorro
     {
-        private string _nome;
-        private string _sexo;
-        private string _raca;
-        private string _porte;
-        private string _idade;
-        private double _peso;
-        private bool _vacinado;
+        public string? Nome { get; set; } //propriedades automaticas não permitem que vc inclua comportamentos nelas, como validações, para isso vc precisa criar uma estrutura padrão de propriedade com o get / set
+        public string? Sexo { get; set; }
+        public string? Raca { get; set; }
+        public int Porte { get; set; }
+        public int Idade { get; set; }
+
+        private double? _peso;
+        public double? Peso 
+        {
+            get { return _peso; }
+            set { _peso = value < 0 ? _peso = 0 : _peso = value; }
+        }
+
+        public bool Vacinado { get; set; }
+
+        // private string _nome;
+        // private string _sexo;
+        // private string _raca;
+        // private string _porte;
+        // private string _idade;
+        // private double? _peso;
+        // private bool _vacinado;
 
         public string Latir() //metodo latir
         {
@@ -61,26 +77,26 @@ namespace TddProject.Domain
 
         }
 
-        public void SetNome(string nome)
-        {
-            _nome = nome;
-        }
+        //public void SetNome(string nome)
+        //{
+        //    _nome = nome;
+        //}
+        //
+        //public string GetNome()
+        //{
+        //    return _nome;
+        //}
 
-        public string GetNome()
-        {
-            return _nome;
-        }
-
-        public void SetPeso(double peso)
-        {
-            peso = peso < 0 ? peso = 0 : peso;
-            _peso = peso;
-        }
-
-        public double GetPeso()
-        {
-            return _peso;
-        }
+        //public void SetPeso(double? peso)
+        //{
+        //    peso = peso < 0 ? peso = 0 : peso;
+        //    _peso = peso;
+        //}
+        //
+        //public double? GetPeso()
+        //{
+        //    return _peso;
+        //}
 
 
 
@@ -108,7 +124,7 @@ namespace TddProject.Domain
 
         public string latindoFor(short latindoFor)
         {
-            string latidos = "";
+            var latidos = "";
 
             for (int i = 1; i <= latindoFor; i++)
   //          {

@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System; //porque vamos usar o console para imprimir mensagens de retorno
-using System.ComponentModel;
+using System.Security.Claims;
 using TddProject.Domain;
 
 namespace TddProject.Tests
@@ -28,8 +28,8 @@ namespace TddProject.Tests
 
             // tipos complexos
             Cachorro leia = new Cachorro();
-            leia.SetNome("Sou a Leia");
-            string retorno = leia.GetNome();
+            leia.Nome="Sou a Leia";
+            string retorno = leia.Nome;
             Console.WriteLine($"retorno tipo complexo: {retorno} / {leia}");
             // aqui nesse teste não declaramos o Assert
         }
@@ -67,11 +67,11 @@ namespace TddProject.Tests
         [TestMethod]
         public void Tipo_de_Referencia_Test()
         {
-            Cachorro cachorro = new Cachorro();
-            cachorro.SetNome("Leia");
+            var cachorro = new Cachorro();
+            cachorro.Nome="Leia";
             HelloLuis.PassaReferencia(cachorro);
 
-            string nomeCachorro = cachorro.GetNome();
+            var nomeCachorro = cachorro.Nome;
             Console.WriteLine($"nomeCachorro: {nomeCachorro}, cachorro: {cachorro}");
 
             //Assert.AreEqual("leia", nomeCachorro);
@@ -91,13 +91,13 @@ namespace TddProject.Tests
         public void Desigualdade_entre_tipo_de_Referencia_Test()
         {
             //Estamos testando a igualdade entre os objetos, comparar dois objetos mesmo que tenham o mesmo conteudo não será igual para o compitador
-            Cachorro tequila = new Cachorro();
-            tequila.SetPeso(10);
-            Cachorro spaik = new Cachorro();
-            spaik.SetPeso(10);
-            Console.WriteLine($"Tequila: {tequila.GetPeso}, Spaik: {spaik.GetPeso} ");
-            //Assert.AreEqual(tequila.GetPeso, spaik.GetPeso);
-            Assert.AreNotEqual(tequila.GetPeso, spaik.GetPeso);
+            var tequila = new Cachorro();
+            tequila.Peso = 10;
+            var spaik = new Cachorro();
+            spaik.Peso = 10;
+            Console.WriteLine($"Tequila: {tequila.Peso}, Spaik: {spaik.Peso} ");
+            Assert.AreEqual(tequila.Peso, spaik.Peso);
+            //Assert.AreNotEqual(tequila.Peso, spaik.Peso);
         }
 
 
@@ -105,13 +105,13 @@ namespace TddProject.Tests
         public void Igualdade_entre_tipo_de_Referencia_Test()
         {
             //Estamos testando a igualdade entre os objetos, comparar dois objetos mesmo que tenham o mesmo conteudo não será igual se vc der new em cada um dos objetos, para um objeto ser igual ao outro, atribua o valor do outro objeto a esse objeto novo, nao crie uma nova instancia com o new, coloque, objeto 1 = objeto 2 dai ambos serão iguais.
-            Cachorro tequila = new Cachorro();
-            tequila.SetPeso(10);
-            Cachorro spaik = tequila; // para um objeto ser igual ao outro, atribua o valor do outro objeto a esse objeto novo, nao crie uma nova instancia com o new, coloque, objeto 1 = objeto 2 dai ambos serão iguais. 
+            var tequila = new Cachorro();
+            tequila.Peso = 10;
+            var spaik = tequila; // para um objeto ser igual ao outro, atribua o valor do outro objeto a esse objeto novo, nao crie uma nova instancia com o new, coloque, objeto 1 = objeto 2 dai ambos serão iguais. 
             //aqui vc está apontando a referencia de um objeto para o outro assim ambos serão iguais ou seja duas referencia em memoria apontando para o mesmo objeto instanciado
-            spaik.SetPeso(10);
-            Console.WriteLine($"Tequila: {tequila.GetPeso}, Spaik: {spaik.GetPeso} ");
-            Assert.AreEqual(tequila.GetPeso, spaik.GetPeso);
+            //spaik.Peso=10;
+            Console.WriteLine($"Tequila: {tequila.Peso}, Spaik: {spaik.Peso} ");
+            Assert.AreEqual(tequila.Peso, spaik.Peso);
             //Assert.AreNotEqual(tequila.GetPeso, spaik.GetPeso);
         }
 
@@ -215,6 +215,110 @@ namespace TddProject.Tests
             Assert.AreEqual(null, idade);
             Assert.AreEqual(null, peso);
             Assert.AreEqual(null, vacinado);
-        }  
+        }
+
+        //######################################################################################################################################//
+        //  ***Níveis de Vusibilidade***
+        //  Niveis de acesso de uma classe e seus membros
+        //
+        //  class
+        //  public: Classe publica pode ser acessada de qualquer parte do nosso codigo, dentro ou fora do seu assembli original
+        //  internal: Classe Internal spo pode ser acessada de dentro do seu proprio Assembly, Para declarar uma classe internal, podemos omitir o atributo internal, o compilador ja á classeifica como internal automaticamente
+        //
+        //  Membros
+        //  public - mesmo nivel de acesso da classe, de qualquer lugar dentro ou fora do assembly
+        //  private - metodo privado só pode ser acessado de dentro da propria classe, dessa forma vc so podera acessar um metodo privado atraves de um outro metodo dentro da sua propria classe
+        //  internal -  nesse caso também so podemos acessalo dentro da nossa propria classe ou também dentro do seu assembly (seu projeto e nas demais classes desse projeto), nos demais assemblys "projetos" da solution vc não rerá acesso a um metodo que está como internal
+        //  protected - o nivel de visibilidade protected member define ue o membro poderá ser acessado apenas pela propia classe, ou por classes derivadas, ou seja as heranças 
+        //  protected internal
+        //######################################################################################################################################//
+
+
+        //vamos simular uma nova classe detro do TddProject.Domain, lembrando que TddProject.Domain é um projeto que quando compilado vira um assembly
+
+        [TestMethod]
+        public void MinhaClasse_test()
+        {
+            var obj = new MinhaClasse();
+            //obj.MeuMetodo(); //o metodo está com nivel de proteção privado, não posso acessar esse metodo aqui
+        }
+
+        [TestMethod]
+        public void Tentando_Acessar_Metodo_Protected_Por_Herança_Test()
+        { 
+            
+        }
+
+
+
+
+        //######################################################################################################################################//
+        //  ***DateTime e TimeSpan***
+        //  Classe do .Net com recursos para representar e manipular datas e horas
+        //
+        //  
+        //######################################################################################################################################//
+
+        [TestMethod]
+        public void DateTime_test()
+        { 
+            var hoje = DateTime.Today; //aqui vamor atribuir a variavel apenas a data de hoje sem a hora
+            Console.WriteLine( $"Today é: {hoje}" );
+
+            var agora = DateTime.Now;
+            Console.WriteLine($"Now é: {agora}");
+        }
+
+        [TestMethod]
+        public void DateTime_Desmembrando_Test()
+        {
+            var agora = DateTime.Now;
+
+            Console.WriteLine($"data e hora: {agora}");
+            Console.WriteLine($"ano: {agora.Year}");
+            Console.WriteLine($"mes: {agora.Month}");
+            Console.WriteLine($"dia: {agora.Day}");
+            Console.WriteLine($"hora: {agora.Hour}");
+            Console.WriteLine($"minuto: {agora.Minute}");
+            Console.WriteLine($"segundo: {agora.Second}");
+            Console.WriteLine($"Milisegundo {agora.Millisecond}");
+            Console.WriteLine($"dia do mes: {agora.DayOfWeek}");
+            Console.WriteLine($"dia do ano: {agora.DayOfYear}");
+        }
+
+        [TestMethod]
+        public void Datetime_Add_Test()
+        {
+            //existe uma serie de metodos do datetime que começam com Add
+            //Umas das funcionalidades praticas que podemos usar com datetime e fazer calculos ou adicionar tempos as datas
+            var agora = DateTime.Now;
+            Console.WriteLine($"agora: {agora}");
+
+            var mais5Horas = DateTime.Now.AddHours(5);
+            Console.WriteLine($"metodo AddHours(5): {mais5Horas}");
+
+
+            var amanha = agora.AddDays(1);
+            Console.WriteLine($"metodo amanhã AddDays(1): {amanha}");
+
+            var ontem = agora.AddDays(-1); //se vc colocar um valor negativo ele vai retroceder os dias ou horas e te mostrar a quantidade que vc especificou retroativamente
+            Console.WriteLine($"metodo AddDays(-1) mostra ontem: {ontem}");
+
+            var mesQueVem = agora.AddMonths(1);
+            Console.WriteLine($"metodo um mes a frente AddMonths(1): {mesQueVem}");
+        }
+
     }
+
+    
+
+    public class CasseFilha2 : MinhaClasse
+    {
+        // Aqui vamos criar uma Classe de fora do assembly "namespace TddProject.Tests " para ver o comportamento de tentar Acessar Metodo Protected Por Herança
+        public void MetodoFilho2()
+        {
+            this.MetodoProtectedInternal();
+        }
+    }
+
 }

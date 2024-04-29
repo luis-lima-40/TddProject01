@@ -11,8 +11,8 @@ namespace TddProject.Tests
         [TestMethod]
         public void cachorro_latir_test() //esta primeira linha superior é a assinatura do metodo e ela não pode se repetir em outro metodo exatamente igual
         {
-            Cachorro leia = new Cachorro();  //Cachorro() é o construtor da classe, aqui estamos criando um objeto da classe cashorro, declaramos uma variavel, damos um nome a esta variavel e instanciamos a classe cachorro (new)  atribuindo o retorno da classe para esta variavel to tipo chachorro chamada Leia
-            string latido = leia.Latir();  //quando vc esta escrevendo um teste, vc cria metodos sem mesmo ele existir, use o intelisense para utilizar a opção do visual studio criar o metodo para vc lá dentro da sua classe
+            var leia = new Cachorro();  //Cachorro() é o construtor da classe, aqui estamos criando um objeto da classe cashorro, declaramos uma variavel, damos um nome a esta variavel e instanciamos a classe cachorro (new)  atribuindo o retorno da classe para esta variavel to tipo chachorro chamada Leia
+            var latido = leia.Latir();  //quando vc esta escrevendo um teste, vc cria metodos sem mesmo ele existir, use o intelisense para utilizar a opção do visual studio criar o metodo para vc lá dentro da sua classe
             Console.WriteLine( latido ); //aqui estou exibindo o resuldado da variavel latido
 
             Assert.AreEqual("Au! Au!", latido);
@@ -27,8 +27,8 @@ namespace TddProject.Tests
         [TestMethod]
         public void Leia_QuantoDevoComer_test()
         {
-            Cachorro leia = new Cachorro();
-            string quantoDevoComerPeso = leia.QuantoDevoComerPeso(10);
+            var leia = new Cachorro();
+            var quantoDevoComerPeso = leia.QuantoDevoComerPeso(10);
             Console.WriteLine( quantoDevoComerPeso );
             Assert.AreEqual("Como tenho 10kg, devo comer 500g por dia", quantoDevoComerPeso);
         }
@@ -36,8 +36,8 @@ namespace TddProject.Tests
         [TestMethod]
         public void Tequila_QuantoDevoComer_test()
         {
-            Cachorro tequila = new Cachorro();
-            string quantoDevoComer = tequila.QuantoDevoComer();
+            var tequila = new Cachorro();
+            var quantoDevoComer = tequila.QuantoDevoComer();
             Console.WriteLine(quantoDevoComer);
             Assert.AreEqual("Coma no maximo 5 % do seu peso corporal, qual é seu peso?", quantoDevoComer);
         }
@@ -45,8 +45,8 @@ namespace TddProject.Tests
         [TestMethod]
         public void Yuri_QuantoDevoComer_test()
         {
-            Cachorro yuri = new Cachorro();
-            double quantoDevoComerMacho = yuri.QuantoDevoComerMacho(10,true);
+            var yuri = new Cachorro();
+            var quantoDevoComerMacho = yuri.QuantoDevoComerMacho(10,true);
             Console.WriteLine(quantoDevoComerMacho);
             Assert.AreEqual(1, quantoDevoComerMacho);
         }
@@ -54,9 +54,9 @@ namespace TddProject.Tests
         [TestMethod]
         public void Cachorro_Set_Get_Nome_Test()
         {
-            Cachorro yuri = new Cachorro();
-            yuri.SetNome("Yuri"); // o set vai gravar a string Yuri dentro do atributo nome clique em refatorar para criar no metodo SetNome na classe cachorro
-            string nome = yuri.GetNome(); //o get vai buscar o valor que está gravado dentro do atributo nome
+            var yuri = new Cachorro();
+            yuri.Nome="Yuri"; // o set vai gravar a string Yuri dentro do atributo nome clique em refatorar para criar no metodo SetNome na classe cachorro
+            var nome = yuri.Nome; //o get vai buscar o valor que está gravado dentro do atributo nome
             Console.WriteLine( nome );
 
             Assert.AreEqual("Yuri", nome );
@@ -64,15 +64,15 @@ namespace TddProject.Tests
         }
 
         [TestMethod]
-        public void Cachorro_Peso_Nao_Pode_Ser_Genativo_Test()
+        public void Cachorro_Peso_Nao_Pode_Ser_Negativo_Test()
         {
             //se o peso informado for negativo não deve gravar o Set, ele tem que ficar como 0
-            Cachorro spaik = new Cachorro();
-            spaik.SetPeso(-1.2);
-            double peso = spaik.GetPeso();
-            Console.WriteLine(peso);
+            var spaik = new Cachorro();
+            spaik.Peso=-1.2;
+            var peso = spaik.Peso;
+            Console.WriteLine(spaik.Peso);
 
-            Assert.AreEqual(0, peso);
+            Assert.AreEqual(0, spaik.Peso);
 
         }
 
@@ -81,8 +81,8 @@ namespace TddProject.Tests
         [TestMethod]
         public void Cachorro_Foi_Vacinado_Test() 
         {
-            Cachorro thor = new Cachorro();
-            bool FuiVacinado = thor.FuiVacinado(true);
+            var thor = new Cachorro();
+            var FuiVacinado = thor.FuiVacinado(true);
             Console.WriteLine(FuiVacinado);
             Assert.AreEqual(true, FuiVacinado);
         }
@@ -91,8 +91,8 @@ namespace TddProject.Tests
         [TestMethod]
         public void Quantas_Vezes_Devo_Latir_Wile_Test()
         {
-            Cachorro thor = new Cachorro();
-            string[] latindo = thor.Latindo(5);
+            var thor = new Cachorro();
+            var latindo = thor.Latindo(5);
             Console.WriteLine(latindo.Length);
             Assert.AreEqual(5, latindo.Length);
         }
@@ -101,10 +101,20 @@ namespace TddProject.Tests
         [TestMethod]
         public void Quantas_Vezes_Devo_Latir_For_Test()
         {
-            Cachorro tequila = new Cachorro();
-            string latindoFor = tequila.latindoFor(3);
+            var tequila = new Cachorro();
+            var latindoFor = tequila.latindoFor(3);
             Console.WriteLine(latindoFor);
             Assert.AreEqual("Au! Au! Au!", latindoFor);
+        }
+
+        [TestMethod]
+        public void Peso_do_Cachorro_Pode_Ser_Nulo_Test() 
+        {
+            var thor = new Cachorro();
+            thor.Peso=null;
+            Console.WriteLine($"o peso do thor é: {thor.Peso}");
+
+            Assert.AreEqual(null, thor.Peso);
         }
 
     }
