@@ -404,9 +404,9 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        //  *** Array / While / FOR / LOOPS E CONDIÇÕES ***
-        //  
-        //  
+        //  *** Array / List / While / FOR / LOOPS E CONDIÇÕES ***
+        //  Um array é um elemento de um determinado tipo, sendo uma estrutura estatica, fixa limitada a um tipo unico, não é possivel misturar string e inteiro por exemplo, ou uma vez que vc determina as posição vc não cosegue em tempo de execução eliminar ou incluir posições
+        //  List
         //  
         //######################################################################################################################################//
 
@@ -440,11 +440,224 @@ namespace TddProject.Tests
 
             do //ele inicia o laco de repetição e valida a condição no final
             {
-                Console.WriteLine(array[i]);
-                i++;
+                //Console.WriteLine(array[i]);
+                //i++;
+                Console.WriteLine(array[i++]); // vc pode simplificar desta forma, assim o compilador vai primeiro mostrar o conteudo do array na posição 0 depois ele ira implementar o i++, funciona da mesma forma que o codigo acima
 
             } while (i < array.Length);
         }
+
+
+        [TestMethod]
+
+        public void Array_For_Test()
+        {
+            //outro laço de repetição é o dowhile que é a inversão do  While
+            var array = new string[] { "leia", "Yuri", "Tequila", "Thor" }; // uma forma facilitade de inicializar um array , sem definir a quantidade de posições, o tamanho do arrai vai ser definido pela quantidade de elementos que vc passar para o array
+
+            // o For contrala o contador dentro de sua própria estrutura, não precisamos declarar o i previamente, ele ja estara na estrutura padrão do for
+
+            for (var i = 0; i < array.Length; i++)
+            //{
+                Console.WriteLine(array[i] ); // como aqui temos apenas 1 linha de instrução podemos omitir as chaves
+            //}
+        }
+
+
+        [TestMethod]
+
+        public void Array_For_Invertido_Test()
+        {
+            //FOR INVERTIDO muito Util para quando vc for fazer uma exclusão dentro de um laço de repetição. Um loop invertido do final para o começo, vc vai percorrer o array e dentro do laço vc vai eliminar o item em uma determinada coleção dentro de um laço faça de forma invertida para não quebrar o laço.
+
+            //For Invertido
+            var array = new[] { "leia", "Yuri", "Tequila", "Thor" }; // uma forma implicita de inicializar um array , sem definir a quantidade de posições nem o tipo, o tipo será determinado de acordo com a atrivuição de valores
+
+            //clique no for com o botão esquerdo > refatorar > Reverse For Statement, ele vai criar a estrutura do for invertido
+            for (var i = array.Length - 1; i >= 0; i--) //começe do final, faça enquanto for maior ou igual a 0 e use um decrementador -- no indice i
+                //{
+                Console.WriteLine(array[i]); // como aqui temos apenas 1 linha de instrução podemos omitir as chaves
+            //}
+        }
+
+
+
+        [TestMethod]
+
+        public void Array_Foreach_Test()
+        {
+            // Foreach é uma evolução do For, comum em liguagens orientadas a objeto 
+            // Simplificando o Foreach internamente monta um For onde vc não precisa se preocupar com o contador nem com o implemento deste contador
+            //
+            var array = new[] { "leia", "Yuri", "Tequila", "Thor" }; // uma forma implicita de inicializar um array , sem definir a quantidade de posições nem o tipo, o tipo será determinado de acordo com a atrivuição de valores
+
+            foreach (var item in array) // foreach (var item in collection) vc declara a variavem e usa a palavra chave de uma determinada coleção, essa coleção no caso é nossa array, assim nossa var vai ser do tipo string conforme nosso array foi declarado implicitamente com os valores
+            {
+                Console.WriteLine( item );
+            }
+        }
+
+
+        [TestMethod]
+
+        public void List_Foreach_Test()
+        {
+            // List - quando vc precisar trabalhar com coleções de uma forma dinamica, não utilize array, utilize listas por exemplo para um crud em banco de dados
+            // dentro do <> vc passa o tipo que vc quer que a lista represente, o tipo de cada item da lista
+            // List<tipo>() a vantagem da Lista é que que vc pode adicionar e remover itens dela
+            // na lista vc tem opções de Add, Count, Foreach entre outras
+            var lista = new List<string> { "leia", "Yuri", "Tequila", "Thor" };     //é um tipo de objeto diferente no C# que é um tipo generico, topo tipo generico tem o sinal de notação "<>" menor maior ,
+            lista.Add("Monck");
+            lista.Remove("Yuri");
+
+
+            foreach (var item in lista) // foreach (var item in collection) vc declara a variavem e usa a palavra chave de uma determinada coleção, essa coleção no caso é nossa array, assim nossa var vai ser do tipo string conforme nosso array foi declarado implicitamente com os valores
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+
+        [TestMethod]
+        public void Dictionary_Test()
+        {
+            // Dictionary também é um tipo generico mas diferente da lista vc pode definir 2 tipos pra ele
+            // é uma estrutura que contem uma chave e um valor, sua chave pode ser inteiro e seu tipo valor pode ser uma string
+            // use quando vc quer ter um indice, uma chave para seus elementos da sua coleção de dados, vc tanbem pode remover um item dado a sua chave.
+
+
+
+            //  var dic = new Dictionary<int, string>(); // instanciando o dicionario chave inteira e conteudo string
+            //  dic.Add(1, "leia"); //adicionando itens no dicionario, o medoto Add vai receber 2 argumentos como parametros, o primeiro um inteiro que vai ser uma chave e segundo uma string que será o valor
+            //  dic.Add(2, "Yuri");
+            //  dic.Add(3, "Tequila");
+            //  dic.Add(4, "Thor");
+            //  dic.Add(5, "Monck");
+            //  dic.Remove(2); // para remover vc pode apenas passar o numero da chave Key
+            //  
+            //  //vamos percorrer o dicionario mas o item do dicionario é o que chamamo de KeyValuePair, observe isso apontando o mouse para o "ITEM" no  foreach
+            //  //KeyValuePair é um objeto que tem as propriedades Key do tipo inteiro e value do tipo string
+            //  
+            //  foreach (var item in dic) // 
+            //  {
+            //      Console.WriteLine($"este é o Key - chave do dicionario: {item.Key} e este é o value (valor string) desta Key: {item.Value}  ");
+            //      Console.WriteLine($"{item.Key} : {item.Value}");
+            //  }
+
+
+            //outra forma de declarar o Dic ja inicializando seus valores na declaração
+            var dic = new Dictionary<int, string>
+            {
+                { 1, "leia" }, //adicionando itens no dicionario, o medoto Add vai receber 2 argumentos como parametros, o primeiro um inteiro que vai ser uma chave e segundo uma string que será o valor
+                { 2, "Yuri" },
+                { 3, "Tequila" },
+                { 4, "Thor" },
+                { 5, "Monck" }
+            }; // instanciando o dicionario chave inteira e conteudo string
+            dic.Remove(2); // para remover vc pode apenas passar o numero da chave Key
+
+            //vamos percorrer o dicionario mas o item do dicionario é o que chamamo de KeyValuePair, observe isso apontando o mouse para o "ITEM" no  foreach
+            //KeyValuePair é um objeto que tem as propriedades Key do tipo inteiro e value do tipo string
+
+            foreach (var item in dic) // 
+            {
+                Console.WriteLine($"este é o Key - chave do dicionario: {item.Key} e este é o value (valor string) desta Key: {item.Value}  ");
+                Console.WriteLine($"{item.Key} : {item.Value}");
+            }
+        }
+
+
+        [TestMethod]
+        public void If_Else_Test()
+        {
+            //estruturas de condição:
+            var agora = DateTime.Now;
+            var numero = agora.Second;
+            var mensagem = "";
+
+            //if verifica uma condição logica, se é verdadeira ou falsa e vai executar o primeiro bloco, do contrario ele executa o segundo bloco
+            // % = resto da divisão / = atribui / == igual
+            if (numero % 2 == 0) // vamos verificar se o numero é impar, pegando o resultado dividindo (% é operador que retorna o resto da divisão) por 2 se é igual a 0, se for é par, senão é impar
+                mensagem = "Par";
+            else
+                mensagem = "Impar";
+            Console.WriteLine( mensagem );
+        }
+
+        [TestMethod]
+        public void If_Inline_ou_Ternario_Test()
+        {
+            //estruturas de condição:
+            var agora = DateTime.Now;
+            var numero = agora.Second;
+
+            var mensagem = numero % 2 == 0 ? $"{numero} é Par": $"{numero} é Impar";
+            Console.WriteLine(mensagem);
+        }
+
+
+        [TestMethod]
+        public void If_Else_If_Test()
+        {
+            //outra variação do if else é o contrario else if, uma estrutura de if com varias condições
+            var hoje = DateTime.Today;
+            var mensagem = "";
+
+            //DayOfWeek é uma estrutura de enum, significa enumerador estrutura fisica de valores possiveis que eu posso dar para uma determinada propriedade
+            if (hoje.DayOfWeek == DayOfWeek.Sunday) //DayOfWeek só pode ganhar um valor desses valores possíveis da lista 
+                mensagem = "Hoje é domingo";
+            else if (hoje.DayOfWeek == DayOfWeek.Monday)
+                mensagem = "Hoje é segunda :(";
+            else if (hoje.DayOfWeek == DayOfWeek.Tuesday)
+                mensagem = "Hoje é terça";
+            else if (hoje.DayOfWeek == DayOfWeek.Wednesday)
+                mensagem = "Hoje é quarta";
+            else if (hoje.DayOfWeek == DayOfWeek.Saturday)
+                mensagem = "Sextou! :)";
+            Console.WriteLine(mensagem);
+        }
+
+        [TestMethod]
+        public void Switch_Case_Test()
+        {
+            
+            var hoje = DateTime.Today;
+            var mensagem = "";
+
+            //switch case : na estrutura inicial vc diz qual é a condição que vc quer fazer a validação  hoje.DayOfWeek e pra cada valor eu tenho um case. quando o seu swit identifica uma condição valida vc usa o break; para que ele não use os demais
+            //quando vc for trabalhar com enuns é interessante iteração com o switch
+            switch (hoje.DayOfWeek) //DayOfWeek só pode ganhar um valor desses valores possíveis da lista 
+            {
+                case DayOfWeek.Sunday:
+                    mensagem = "Hoje é domingo";
+                    break;
+                case DayOfWeek.Monday:
+                    mensagem = "Hoje é segunda :(";
+                    break;
+                case DayOfWeek.Tuesday:
+                    mensagem = "Hoje é terça";
+                    break;
+                case DayOfWeek.Wednesday:
+                    mensagem = "Hoje é quarta";
+                    break;
+                case DayOfWeek.Saturday:
+                    mensagem = "Sextou! :)";
+                    break;
+            }
+            Console.WriteLine(mensagem);
+        }
+
+
+        //Atividades:
+        //criar testes unitarios e um metodo no cachorro que faça as seguintes validações:
+        //Nome do cachorro é obrigatório
+        //Sexo do cachorro precisa ser "Femea" ou "Macho". Qualquer outro valor é inválido!
+        //Data de nascimento não pode ser maior que data de hoje
+        //Peso deve ser maior que 0
+        //Esse Metodo deverá retornar as mensagens no caso de campos inválidos. ou Null se tudo estiver OK
+        //esse metodo deverá retornar caso uma ou mais dessas condições sejam falsas, retorne uma mensagem,
+        //se tiver mais que uma mensagem de erro retorne as mensagem em uma coleção, uma lista de strings
+        //se todas as condições estão ok e o cachorro 100% validado, retorne null
     }
 
     public class CasseFilha2 : MinhaClasse
