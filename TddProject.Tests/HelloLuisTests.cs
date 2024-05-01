@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System; //porque vamos usar o console para imprimir mensagens de retorno
+using System.Net.WebSockets;
 using System.Security.Claims;
 using TddProject.Domain;
 
@@ -13,7 +14,7 @@ namespace TddProject.Tests
         {
             string mensagem = HelloLuis.SayHello(); // para capturar um retorno, coloque no inicio o tipo do retorno e de um nome para esse retorno
             Assert.AreEqual("Hello Luis", mensagem); // o  Assert.AreEqual tem 2 parametros, um é o que eu espero que ele retorne e a mensagem que meu metodo acima irá refotnar que é valo que está na variavel mensagem, para validar se o retorno do meu metodo está ok ou não, use uma classe do framework de teste chamada de Assert / AreEqual valida o retorno esperado se é igual, ou seja vc verifica se o retorno do metodo que vc está testando bate com o valor que vc especificou como valor esperado
-            Console.WriteLine( mensagem );//cw + tab é um atalho para Console.WriteLine...  neste  teste vai dar errado pq no meu metrodo está retornando uma string vazia, quando eu preencher no meu metodo a mesma string que eu declarei aqui como string esperada ai sim o teste vai dar OK
+            Console.WriteLine(mensagem);//cw + tab é um atalho para Console.WriteLine...  neste  teste vai dar errado pq no meu metrodo está retornando uma string vazia, quando eu preencher no meu metodo a mesma string que eu declarei aqui como string esperada ai sim o teste vai dar OK
         }
 
         [TestMethod]
@@ -28,7 +29,7 @@ namespace TddProject.Tests
 
             // tipos complexos
             Cachorro leia = new Cachorro();
-            leia.Nome="Sou a Leia";
+            leia.Nome = "Sou a Leia";
             string retorno = leia.Nome;
             Console.WriteLine($"retorno tipo complexo: {retorno} / {leia}");
             // aqui nesse teste não declaramos o Assert
@@ -39,14 +40,14 @@ namespace TddProject.Tests
         {
             int inteiro = 10;
             double valor = inteiro;
-            Console.WriteLine( valor );
+            Console.WriteLine(valor);
             Assert.AreEqual(inteiro, valor);
         }
 
         [TestMethod]
         public void Conversão_Explicita_Test()
         {
-            
+
             double valor = 10.5;
             int inteiro = (int)valor; //cast explicito, um convert encurtado
             Console.WriteLine($"inteiro: {inteiro}, valor:{valor}");
@@ -68,7 +69,7 @@ namespace TddProject.Tests
         public void Tipo_de_Referencia_Test()
         {
             var cachorro = new Cachorro();
-            cachorro.Nome="Leia";
+            cachorro.Nome = "Leia";
             HelloLuis.PassaReferencia(cachorro);
 
             var nomeCachorro = cachorro.Nome;
@@ -79,7 +80,7 @@ namespace TddProject.Tests
         }
 
         [TestMethod]
-        public void Igualdade_entre_tipo_de_valor_Test() 
+        public void Igualdade_entre_tipo_de_valor_Test()
         {
             int valor = 10;
             int valor2 = 10;
@@ -137,8 +138,8 @@ namespace TddProject.Tests
         {
             //em uma declaração implicita, ao inves do tipo da variavel, use a palavra chave "var" antes do nome da sua variavel
             var nome = ""; // na declaração implicita, o compilador identifica o tipo da sua varial de acordo com o tipo de atribuição de valor que vc fez a ela
-            var idade = 13; 
-            var peso = 1.3; 
+            var idade = 13;
+            var peso = 1.3;
             var cachorro = new Cachorro(); // na declaração implicita, o compilador identifica o tipo da sua varial de acordo com o tipo de atribuição de valor que vc fez a ela
 
             //assert para validar se as variaveis são do tipo que criamos use typeof como parametro no AreEqual 
@@ -155,7 +156,7 @@ namespace TddProject.Tests
             //não podemos declarar variaveis do tipo implicito sem atribuir valor
             //Existe umas limitações onde vc não pode utilizar o var como uma declaração implicita, a principal é que vc não pode fa
             Cachorro cachorro;
-            cachorro = new Cachorro(); 
+            cachorro = new Cachorro();
             Assert.AreEqual(typeof(Cachorro), cachorro.GetType());
             //neste exemplo acima nos declaramos uma variavel chachorro explicitamnte do tipo cachorro e atribuimos o valor a ela na linha abaixo, isso o compilador permite, pois ele ja conhece o tipo da variavel
 
@@ -183,10 +184,10 @@ namespace TddProject.Tests
             //Tipos Nuláveis por padrão no C#:  variaveis do tipo string e todos os tipos de objects e seus derivados como nulos
 
             string nome = null;
-            Cachorro cachorro = null; 
+            Cachorro cachorro = null;
 
-            Assert.AreEqual(null , nome);
-            Assert.AreEqual(null , cachorro);
+            Assert.AreEqual(null, nome);
+            Assert.AreEqual(null, cachorro);
 
             //não da certo, não aceitam nulo
             //int idade = null; //nao podemos atribuir null ao tipo inteito, não é um tipo nulavel
@@ -245,15 +246,15 @@ namespace TddProject.Tests
 
         [TestMethod]
         public void Tentando_Acessar_Metodo_Protected_Por_Herança_Test()
-        { 
-            
+        {
+
         }
 
 
 
 
         //######################################################################################################################################//
-        //  ***DateTime e TimeSpan***
+        //  ***DateTime***
         //  Classe do .Net com recursos para representar e manipular datas e horas
         //
         //  
@@ -261,9 +262,9 @@ namespace TddProject.Tests
 
         [TestMethod]
         public void DateTime_test()
-        { 
+        {
             var hoje = DateTime.Today; //aqui vamor atribuir a variavel apenas a data de hoje sem a hora
-            Console.WriteLine( $"Today é: {hoje}" );
+            Console.WriteLine($"Today é: {hoje}");
 
             var agora = DateTime.Now;
             Console.WriteLine($"Now é: {agora}");
@@ -308,9 +309,143 @@ namespace TddProject.Tests
             Console.WriteLine($"metodo um mes a frente AddMonths(1): {mesQueVem}");
         }
 
-    }
+        [TestMethod]
+        public void DateTime_Inicializacao_Test()
+        {
+            //para iniciliar uma data e hora, crie uma instancia de datetime
+            var data = new DateTime(2025, 1, 1); //temos 12 tipos de contrutores diferentes, então utilize o mais adequado, passe um que usa 3 parametros como ano, mes e dia
+            Console.WriteLine($"instanciando uma variavel do tipo datedime e passando o parametro usando o construtor ano,mes,dia: {data}");
 
-    
+            var dataHora = new DateTime(2025, 1, 1, 20, 10, 0); //temos 12 tipos de contrutores diferentes, então utilize o mais adequado, passe um que usa 3 parametros como ano, mes e dia
+            Console.WriteLine($"instanciando uma variavel do tipo datedime e passando o parametro usando o construtor ano,mes,dia, hora, minuto e segundos: {dataHora}");
+        }
+
+        [TestMethod]
+        public void Datetime_Convertendo_De_String_Test()
+        {
+            //convertendo dateTime = transformar uma string que representa data e hora em um DateTime
+            //utilize o metodo statico do Datetime chamado Parse que faz conversão
+            var dataParse = DateTime.Parse("17/10/2020"); //aqui passamos no formato brasileiro dia mes e ano, meu computador está no bormato PT-BR 
+            Console.WriteLine($"Utilizando o metodo Parse para converter string em data: {dataParse}");
+
+            var dataHoraParse = DateTime.Parse("17/10/2020 23:45"); //aqui passamos no formato brasileiro dia mes e ano, meu computador está no bormato PT-BR 
+            Console.WriteLine($"Utilizando o metodo Parse para converter string em data e Hora: {dataHoraParse}");
+        }
+
+        [TestMethod]
+        public void Datetime_Quantidade_Dias_Mes_Test()
+        {
+            //util para saber qual é o ultimo dia de um determinado mes, 28, 29, 30 ou 31 dependendo do mes
+            //utilize o metodo do Datetime chamado DaysInMonth()
+            var diaMes = DateTime.DaysInMonth(24, 2); //esse metodo DaysInMonth() receve 2 parametros ano e mes separados por virgura
+            Console.WriteLine($"ultimo dia de um determinado mes DaysInMonth(17,10) : {diaMes}");
+
+            //para vc calcular o ultimo dia do mes, utilize o mestodo acima e depois use
+            var ultimoDiaMes = new DateTime(2024, 2, (int)(DateTime.DaysInMonth(24, 2)));
+            Console.WriteLine($"Variavel com Intancia datetime passando no campo dia outro datetime com o metodo DaysInMonth()) do mesmo ano/mes que quero saber o ultimo dia do mês var ultimoDiaMes = new DateTime(2024, 2, (int)(DateTime.DaysInMonth(24, 2))); note que foi feito um convert para int do resultado do DaysInMonth para subistituir o parametro do dia do primeiro metodo datetime  : {ultimoDiaMes}");
+        }
+
+        [TestMethod]
+
+        public void DateTime_Formatações_Test()
+        {
+            var agora = DateTime.Now;
+            //Console.WriteLine() aceita qualquer coisa como parametro, qualquer tipo de objeto, variavel, array texto etc
+            Console.WriteLine(agora); //toda vez que passamos um objeto ou variavel para o Console.WriteLine(),  o compilador sempre chama o metodo ToString() para exibir em tela o resultado que que vc passou como parametro
+            Console.WriteLine($"agora no formato padrao da maquina PT-BR: {agora.ToString()}");// a linha acima é a mesma coisa que esta linha, ToString() é omitido pelo compilador mas esta sendo executado de forma oculta para exibir o resultado
+            Console.WriteLine($"Agora no formato Universal full date/Time: {agora.ToString("U")}"); // com o metodo ToString() dentro do parenteses digite uma aspas simples para que o intelicense te mostre todos os tipos de formatos de string que o ToString aceita, escolha o formato que deseja. podemos colocar a formatação especifica que determinarmos para ser exibida em tela
+            //voce também pode criar a sua propria formatação personalizada passando os parametros de como deve aparecer o dia mes ano hora minuto segundo etc
+            Console.WriteLine($"Agora personalizado, formatei para Mes / dia / ano c/ 2 dig: {agora.ToString("MM/dd/yy")}");
+        }
+
+
+
+
+
+        //######################################################################################################################################//
+        //  ***TimeSpan***
+        //  Classe do .Net que representa uma "quantidade de tempo"
+        //  para trabalhar com calculos entre dadas e horas
+        //  
+        //######################################################################################################################################//
+
+        [TestMethod]
+
+        public void TipeSpan_Test()
+        {
+            //ATENÇÃO - quando for trabalhar em calculos de anos e meses o TimeSpan não é uma boa solução, ao inves de usalo, tente trabalhar do DateTime como exemplo
+            ////var anos = DateTime.Now.Year - DataNascimento.Year;
+            ///var mes = DateTime.Now.Month - DataNascimento.Month + (12 * anos);
+            //ATENÇÃO FIM
+            var hoje = DateTime.Today;
+            var amanha = hoje.AddDays(1);
+            //aqui vamos fazer uma conta, de qual a diferença de tempo entre hoje e amanhã
+            var difTempo = amanha.Subtract(hoje); // o metodo Subtract() não vai me retornar um outro date time, ele é um Time Span e vai me mostrar o resultado como uma quantidade de tempo
+            Console.WriteLine($"Essa é o resultado da quantidade de tempo entre hoje e amanha usando o metodo .Subtract() que retorna um tymespan :  {difTempo}");
+            //o resultado retornado é  1.00:00:00 ou seja 1 dia, 00 horas 00 minutos 00 segundos
+            var data1 = new DateTime(2024, 4, 29, 23, 19, 15);
+            var data2 = new DateTime(2024, 5, 1, 10, 11, 54);
+            Console.WriteLine($"Resultado data2.Subtract(data1) com datas instanciadas no datetime passando como parametro minhas datas:  {data2.Subtract(data1)}");
+            var dif = data2.Subtract(data1);
+            Console.WriteLine($"Resultado segundos :  {dif.TotalSeconds}");
+            Console.WriteLine($"Resultado minutos :  {dif.TotalMinutes}");
+            Console.WriteLine($"Resultado horas :  {dif.TotalHours}");
+            Console.WriteLine($"Resultado dias :  {dif.Days}");
+        }
+
+        // Crie uma propriedade no cachorro para armazenar data de nascimento
+        //remover a propriedade idade do cachorro
+        //crie um teste unitario e um metodo que retorne a idade do cachorro
+        //a idade deve ser retornada em uma string exemplo "10 anos" ou "2 meses"
+
+
+        //Em C#, o operador relacional != significa "diferente de". Outros operadores relacionais incluem: == (igual), < (menor que), > (maior que), <= (menor ou igual), >= (maior ou igual)
+
+
+
+        //######################################################################################################################################//
+        //  *** Array / While / FOR / LOOPS E CONDIÇÕES ***
+        //  
+        //  
+        //  
+        //######################################################################################################################################//
+
+
+        [TestMethod]
+        public void Array_While_Test()
+        {
+            var array = new int[3]; // instanciando um objeto do tipo Array int de 3 posições
+            array[0] = 10; //atribuindo valores as posições usando o i (indice de cada posição no array)
+            array[1] = 20;
+            array[2] = 30;
+
+            var i = 0; // para fazer o laço de repetição crie uma variavel contador i que representara o indice e servira para fazer a contagem da posição
+
+            while (i < array.Length) // enquanto o i for menos que array.Length a propriedade Length é o que verifica(determina) a quantidade de posição que existe no array, de elementos que estão no array, no caso vai retornar 3
+            {
+                Console.WriteLine(array[i]);// vamos mostrar no console o conteudo do array usando o i como indice,
+                i++; //implementando o contador para que ele serviça de estrutura para o loop, 
+                // para cada interação do while vai ser impreso o conteudo do array
+            }
+        }
+
+        [TestMethod]
+
+        public void Array_Do_While_Test()
+        {
+            //outro laço de repetição é o dowhile que é a inversão do  While
+            var array = new string[] { "leia", "Yuri", "Tequila", "Thor" }; // uma forma facilitade de inicializar um array , sem definir a quantidade de posições, o tamanho do arrai vai ser definido pela quantidade de elementos que vc passar para o array
+
+            var i = 0; // para fazer o laço de repetição crie uma variavel contador i que representara o indice e servira para fazer a contagem da posição
+
+            do //ele inicia o laco de repetição e valida a condição no final
+            {
+                Console.WriteLine(array[i]);
+                i++;
+
+            } while (i < array.Length);
+        }
+    }
 
     public class CasseFilha2 : MinhaClasse
     {

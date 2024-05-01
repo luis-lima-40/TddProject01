@@ -10,7 +10,7 @@ namespace TddProject.Domain
         public string? Sexo { get; set; }
         public string? Raca { get; set; }
         public int Porte { get; set; }
-        public int Idade { get; set; }
+        public DateTime DataNascimento { get; set; }
 
         private double? _peso;
         public double? Peso 
@@ -132,6 +132,57 @@ namespace TddProject.Domain
   //          }
             return latidos.TrimEnd();
         }
+
+
+        public string GetIdade()
+        {
+            var anos = DateTime.Now.Year - DataNascimento.Year; // aqui calcula o ano atual - ano de nascimento
+            var mes = DateTime.Now.Month - DataNascimento.Month + (12 * anos); //aqui pegamos o mes atual - mes de nascimento, se  tiver 0 anos no calculo acima somando com a quantidade de meses vai dar 0 anos + os meses de vida, se tiver 1 ano ou mais, var ser a quantidade de anos calculado acima + a quantidade de meses calculado abaixo obtendo assim a idade com anos e meses
+
+            //string _return = idade > 1 ? $"{idade} anos" : $"{idade} ano";
+            //return _return;
+
+            if (mes < 12)
+                return mes > 1 ?  $"{mes} meses" : " 1 mes";
+            else
+                return anos > 1 ? $"{anos} anos" : $"1 ano";
+        }
+
+        public string GetIdadeCompleta()
+        {
+            var anosBruto = DateTime.Now.Year - DataNascimento.Year; // aqui calcula o ano atual - ano de nascimento
+            var anos = (DateTime.Now.DayOfYear < DataNascimento.DayOfYear) ? anosBruto = anosBruto - 1 : anosBruto;
+            
+            var mesBruto = DateTime.Now.Month - DataNascimento.Month;
+
+            int mes;
+
+            if (mesBruto != 0)
+            {
+                if (mesBruto < DateTime.Now.Month)
+                {
+                    var calMes = (mesBruto < 0 ? mesBruto + 12 : mesBruto - 12);
+                    mes = calMes < 0 ? calMes * -1 : calMes;
+                }
+                else
+                {
+                    var calMes = (mesBruto < 0 ? mesBruto + 12 : mesBruto - 12);
+                    mes = calMes < 0 ? calMes * -1 : calMes;
+                }
+            }
+            else 
+            {
+                mes = mesBruto;
+            }
+
+
+            if (anos <0 & mes < 12)
+                return $"{mes} meses";
+            else
+                return anos > 1 ? $"{anos} anos e {mes} meses" : $"{anos} ano e {mes} meses";
+        }
+
+
     }
 
  

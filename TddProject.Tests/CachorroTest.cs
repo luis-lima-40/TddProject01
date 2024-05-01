@@ -117,5 +117,64 @@ namespace TddProject.Tests
             Assert.AreEqual(null, thor.Peso);
         }
 
+
+
+
+        // Crie uma propriedade no cachorro para armazenar data de nascimento
+        //remover a propriedade idade do cachorro
+        //crie um teste unitario e um metodo que retorne a idade do cachorro
+        //a idade deve ser retornada em uma string exemplo "10 anos" ou "2 meses"
+        [TestMethod]
+        public void Cachorro_GetIdade_Em_Anos_Test()
+        {
+            var cachorro = new Cachorro();
+            cachorro.DataNascimento = new DateTime(2020, 1, 10);
+
+            var idade =  cachorro.GetIdade();
+            Assert.AreEqual("4 anos", idade);
+            Console.WriteLine($"idade: {idade}");
+        }
+
+
+        [TestMethod]
+        public void Cachorro_GetIdade_Um_Ano_Test()
+        {
+            var cachorro = new Cachorro();
+            cachorro.DataNascimento = new DateTime(2023, 1, 10);
+
+            var idade = cachorro.GetIdade();
+            Assert.AreEqual("1 ano", idade);
+            Console.WriteLine($"idade: {idade}");
+        }
+
+
+
+
+        [TestMethod]
+        public void Cachorro_GetIdade_Meses_Test()
+        {
+            var cachorro = new Cachorro();
+            cachorro.DataNascimento = new DateTime(1981, 6, 19);
+
+            var idade = cachorro.GetIdade();
+            Assert.AreEqual("43 anos", idade);
+
+            Console.WriteLine($"idade: {idade}");
+        }
+
+
+ 
+        [TestMethod]
+        public void Cachorro_GetIdade_Completa_Test() //metodo luis paga calcular anos e meses de idade GetIdadeCompleta
+        {
+            var cachorro = new Cachorro();
+            cachorro.DataNascimento = new DateTime(1981, 6, 19);
+            var idade = cachorro.GetIdadeCompleta();
+            Assert.AreEqual("42 anos e 10 meses", idade);
+            Console.WriteLine($"idade: {idade}");
+        }
+
+
+
     }
 }
