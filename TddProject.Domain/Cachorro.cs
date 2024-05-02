@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
@@ -8,7 +11,15 @@ namespace TddProject.Domain
     {
         public string? Nome { get; set; } //propriedades automaticas não permitem que vc inclua comportamentos nelas, como validações, para isso vc precisa criar uma estrutura padrão de propriedade com o get / set
         public string? Sexo { get; set; }
-        public string? Raca { get; set; }
+              
+        enum SexoTipo
+        {
+            Fêmea,
+            Maxho
+        }
+
+        //public string? Raca { get; set; }
+        public Raca Raca { get; set; }//trocando o tipo da propriedade Raca de String para Classe Raca que criamos para fazer associação entre as classes cachorro e a nova classe Raca, neste momento estamos dizendo que a classe cachorro tem uma associação com a classe raca
         public int Porte { get; set; }
         public DateTime DataNascimento { get; set; }
 
@@ -182,6 +193,94 @@ namespace TddProject.Domain
                 return anos > 1 ? $"{anos} anos e {mes} meses" : $"{anos} ano e {mes} meses";
         }
 
+
+        //Atividades:
+        //criar testes unitarios e um metodo no cachorro que faça as seguintes validações:
+        //Nome do cachorro é obrigatório
+        //Sexo do cachorro precisa ser "Femea" ou "Macho". Qualquer outro valor é inválido!
+        //Data de nascimento não pode ser menor que data de hoje
+        //Peso deve ser maior que 0
+        //Esse Metodo deverá retornar as mensagens no caso de campos inválidos. ou Null se tudo estiver OK
+        //esse metodo deverá retornar caso uma ou mais dessas condições sejam falsas, retorne uma mensagem,
+        //se tiver mais que uma mensagem de erro retorne as mensagem em uma coleção, uma lista de strings
+        //se todas as condições estão ok e o cachorro 100% validado, retorne null
+        //mudar o retorno do metodo para list<>
+
+        // public List<string>? Validar()
+        // {
+        //     var mensagens = new List<string>();
+        //     //regras: Nome do cachorro é obrigatório
+        //     //if (Nome == null || Nome == "" || Nome == "  ")
+        //     //no string existe um metodo chamado IsNullOrEmpty que é util para verificar se a variavel é varia ou nula
+        //     //no string existe o metodo chamado IsNullOrWhiteSpace verifica se é vazio, nulo ou se tem espaço em branco
+        //     if (string.IsNullOrWhiteSpace(Nome)) // se for igual a vazio, nulo ou se tem espaço em branco vai retornar true neste caso a lista de mensagem vai ser preenchida
+        //     {
+        //         mensagens.Add("Nome do cachorro é obrigatório!");
+        //     }
+        // 
+        //     if (Sexo != "Fêmea" && Sexo != "Macho")
+        //     {
+        //         mensagens.Add("Sexo do cachorro deve ser Fêmea ou Macho!");
+        //     }
+        // 
+        //     if (DataNascimento > DateTime.Today )
+        //     {
+        //         mensagens.Add("Data de nascimento deve ser menor que data de hoje!");
+        //     }
+        // 
+        // 
+        //     if (Peso <= 0)
+        //     {
+        //         mensagens.Add("Peso do cachorro deve ser maior que Zero!");
+        //     }
+        // 
+        // 
+        //     return mensagens.Count == 0 ? null : mensagens;
+        // }
+
+        // Refatorando o Metodo validar com tray catch e não vamos mais retornar uma lista de mensagens, vamos retornar void
+        public void Validar()
+        {
+            var mensagens = new List<string>();
+            //regras: Nome do cachorro é obrigatório
+            //if (Nome == null || Nome == "" || Nome == "  ")
+            //no string existe um metodo chamado IsNullOrEmpty que é util para verificar se a variavel é varia ou nula
+            //no string existe o metodo chamado IsNullOrWhiteSpace verifica se é vazio, nulo ou se tem espaço em branco
+            if (string.IsNullOrWhiteSpace(Nome)) // se for igual a vazio, nulo ou se tem espaço em branco vai retornar true neste caso a lista de mensagem vai ser preenchida
+            {
+                mensagens.Add("Nome do cachorro é obrigatório!");
+            }
+
+            if (Sexo != "Fêmea" && Sexo != "Macho")
+            {
+                mensagens.Add("Sexo do cachorro deve ser Fêmea ou Macho!");
+            }
+
+            if (DataNascimento > DateTime.Today)
+            {
+                mensagens.Add("Data de nascimento deve ser menor que data de hoje!");
+            }
+
+
+            if (Peso <= 0)
+            {
+                mensagens.Add("Peso do cachorro deve ser maior que Zero!");
+            }
+
+            if (mensagens.Count > 0) //
+            {
+                var exceptionMessage = "";
+                foreach (var item in mensagens)
+                {
+                    //vou pegar a variavel exceptionMessage, dizer que ela é igual a ela mesma (+= com este operador) e somar com o item da coleção e 
+                    //concatenar as mensagens de acordo com o loop, quando encontrar mensagem vai adicionar uma linha
+                    // com o pulo de linha Environment.NewLine;  
+                    exceptionMessage += item + Environment.NewLine;
+                }
+                throw new Exception(exceptionMessage);
+            }
+            
+        }
 
     }
 

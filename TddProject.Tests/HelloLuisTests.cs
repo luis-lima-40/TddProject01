@@ -648,6 +648,13 @@ namespace TddProject.Tests
         }
 
 
+        //Os operadores bolianos lógicos executam operações lógicas com operandos bool. 
+        //Os operadores incluem: 
+        //negação lógica unária(!),
+        //AND lógico binário(&),
+        //OR(|) e OR exclusivo(^)
+        //e os lógicos condicionais binários AND(&&) e OR(||).
+
         //Atividades:
         //criar testes unitarios e um metodo no cachorro que faça as seguintes validações:
         //Nome do cachorro é obrigatório
@@ -658,6 +665,69 @@ namespace TddProject.Tests
         //esse metodo deverá retornar caso uma ou mais dessas condições sejam falsas, retorne uma mensagem,
         //se tiver mais que uma mensagem de erro retorne as mensagem em uma coleção, uma lista de strings
         //se todas as condições estão ok e o cachorro 100% validado, retorne null
+
+
+        //######################################################################################################################################//
+        //  *** Exceptions ***
+        //  Exception é um erro ou problema que ocorre durante a execução de um programa
+        //  o C# nos permite fazer o tratamento de exceptions
+        //  temos uma série de ferramentas para trabalhar com exceptions, veremos algumas delas
+        //######################################################################################################################################//
+
+        [TestMethod]
+        public void Exception_Test()
+        {
+            // o recurso para tratamento de exception tray catch  faz com que seu programa não pare inesperadamente e seja exibido para o usuário que ele esta fazendo uma operação ilegal o que houve um erro sistemico.
+            try
+            {
+                
+                Cachorro cachorro = null; //aqui estamos criando uma variavel do tipo Cachorro e atribuindo Null, quando vc tentar rodar algum metodo dessa variavel vai estourar um erro
+                //aqui é um ponteiro de memoria que não aponta pra nada
+                if (cachorro == null) //Por ultimo podemos forçar o programa para ocorrer uma excessção com a vamos exemplificar isso aqui
+                    throw new Exception("O Cachorro não foi Instanciado!");  // throw lança uma exception e vc pode definir a mensagem que deseja para essa excessão
+
+                cachorro.Validar(); //System.NullReferenceException: 'Object reference not set to an instance of an object.' é o tipo de exception que mais vamos ver em c#
+                //que é System.NullReferenceException,vc tem um objeto que está nulo, não tem nenhuma referencia em memora e não aponta para uma classe,  e estamos tentando executar um metodo da classe que ainda não foi instanciado
+
+                var x = 10; //vamos forçar um erro comum em linguagem de programação
+                var y = 0;
+                var resultado = x / y; // vai dar erro pois não é possivel fazer divisão por 0
+                Console.WriteLine(resultado); // o teste falhou e foi lancado uma exception (System.DivideByZeroException: Attempted to divide by zero.)
+
+            }// vc pode fazer uma tratativa para cada tipo de exception  e ter mais do que 1 bloco catch de excessão
+
+            catch (DivideByZeroException)
+            {
+                //catch de exceptions excesivas
+                Console.WriteLine("Erro de divisão por Zero!");
+            }
+
+            catch (Exception ex)
+            {
+                //catch de exceptions excesivas
+                Console.WriteLine(ex);
+            }
+            // um outro recurso importante do try, catch é finally
+            // O finally é um bloco de codigo que vai ser executado se cair em algum catch, ele sempre será executado se der erro ou não
+            // // Se o codigo no seu tray executar sem nenhum erro, com sucesso ele vai cair no Finally, se der erro, vai cair no Catch e depois no Finally também
+            finally 
+            {
+                Console.WriteLine( "Fim do Teste no bloco Finally" );
+            }
+
+
+        }
+
+        //######################################################################################################################################//
+        //  *** Associação ***
+        //  Associação na orientação a objetos, é quando uma classe 
+        //  possui uma propriedade que aponta para outra classe do Modelo
+        //  Seria o equivalente a chave estrangeira do modelo relacional
+        //  ou seja, um relacionamento entre duas classe chamamos de Associação
+        //######################################################################################################################################//
+
+
+
     }
 
     public class CasseFilha2 : MinhaClasse
