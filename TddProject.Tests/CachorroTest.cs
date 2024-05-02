@@ -1,4 +1,5 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
 using System.Reflection.PortableExecutable;
 using TddProject.Domain;
 
@@ -285,7 +286,7 @@ namespace TddProject.Tests
                 var cachorro = new Cachorro
                 {
                     Nome = "",
-                    Sexo = "xdds",
+                    Sexo = Sexo.Macho,
                     DataNascimento = new DateTime(2025,2,20),
                     Peso = 0
                 }; // ao invez de vc instanciar um objeto e preencher propriedade por propriedade manualmente, vc pode fazer uma inicilização automatica em refatorar usando Object initialization can be simplified
@@ -301,7 +302,7 @@ namespace TddProject.Tests
                 //não vamos poder usar o AreEqual, pois o retorno pode ter mais que uma mensagem de erro, vamos precisr
                 //usar uma variavel auxiliar com o metodo Contains();  que verifica se o texto expecifico contem no retorno do ex.Message
                 var ok = ex.Message.Contains("Nome do cachorro é obrigatório!") &&
-                         ex.Message.Contains("Sexo do cachorro deve ser Fêmea ou Macho!") &&
+                         //ex.Message.Contains("Sexo do cachorro deve ser Fêmea ou Macho!") && // transformado em enum não precisamos mais validar o sexo
                          ex.Message.Contains("Data de nascimento deve ser menor que data de hoje!") &&
                          ex.Message.Contains("Peso do cachorro deve ser maior que Zero!");
 
@@ -347,7 +348,68 @@ namespace TddProject.Tests
         //  Por padrão, essa funcionalidade não é instalada no Visual Studio.
         //  Mas podemos instalá-la pelo Visual Studio Installer.
         //  Esta ferramente permite vc montar um diagrama de uma maneira visual e é otima para modelar e ver o modelo como um todo
+        //  Apos instalado, selecione seu projeto, vá no menu project > Add new Item, Procure por  Cass Diagram, de um nome nesse caso aqui sera Modelo
+        //  Arraste suas classes para o Designer, em suas propriedades que tem associação com outras classe clique nela e selecione Show Ass Association
         //######################################################################################################################################//
+
+
+        //Exercicios:
+        //Crie uma nova classe chamada Dono com as propriedades Nome, Telefone e Email
+        //Na classe cachorro, crie uma associação com a classe Dono, ou seja um cachorro deve ter um Dono
+        //Inclua essa nova classe e Associação no Diagrama
+
+        [TestMethod]
+
+        public void Cachorro_Deve_Ter_Um_Dono_Test()
+        {
+            var luis = new Dono
+            {
+                Nome = "Luis",
+                Telefone = "11948357348",
+                Email = "luis.carlos.lider@hotmail.com"
+            };
+            var tequila = new Cachorro
+            {
+                Nome = "Tequila",
+                Dono = luis                //estamos instanciando esses objetos mas criando um vinculo entre os dois objetos, temos uma propriedade Raca na classe cachorro do Tipo da classe Raca que esta vinvulado a classe cachorro
+            };
+
+            Console.WriteLine(tequila.Dono.Nome);
+            Assert.AreEqual("Luis", tequila.Dono.Nome);
+        }
+
+        //######################################################################################################################################//
+        //  *** Enum ***
+        //  Um enum ou enumeration é um tipo especial do C#, onde podemos definir um conjunto de constantes nomeadas
+        //  Internamente essas constantes sçao do tipo int
+        //  Muito útil para enriquecer o modelo da aplicação, para tipos que so podem ser unicos, como sexo, Macho ou Fêmea, 
+        //  ou uma propriedade como Departamento de uma empresa onde sua estrutura fisica e organizacional
+        //  ja possui um numero determinado e fixo de departamento, ou seja, vc é obrigado e escolhar uma das opções listadas no enum
+        //  sem a possibilidade de mudar ou alterar evitando erros de iput incorreto
+        //######################################################################################################################################//
+
+
+        [TestMethod]
+        public void Cachorro_Enum_Sexo_Test()
+        {
+            var cachorro = new Cachorro
+            {
+                Nome = "Leia",
+                Sexo = Sexo.Femea
+            };
+            Console.WriteLine(cachorro.Sexo);
+            Assert.AreEqual(Sexo.Femea, cachorro.Sexo);
+
+        }
+
+
+        //Exercícios
+        //  *** Enum ***
+        //  transfira a propriedade Porte do Cachorro para Classe Raca
+        //  Transformar a propriedade Porte da Raca do Cachorro para um Enum
+        //  Atualizar Testes Unitários e Diagrama
+        
+
 
     }
 }

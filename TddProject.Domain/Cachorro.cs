@@ -10,14 +10,8 @@ namespace TddProject.Domain
     public class Cachorro
     {
         public string? Nome { get; set; } //propriedades automaticas não permitem que vc inclua comportamentos nelas, como validações, para isso vc precisa criar uma estrutura padrão de propriedade com o get / set
-        public string? Sexo { get; set; }
+        public Sexo Sexo { get; set; }
               
-        enum SexoTipo
-        {
-            Fêmea,
-            Maxho
-        }
-
         //public string? Raca { get; set; }
         public Raca Raca { get; set; }//trocando o tipo da propriedade Raca de String para Classe Raca que criamos para fazer associação entre as classes cachorro e a nova classe Raca, neste momento estamos dizendo que a classe cachorro tem uma associação com a classe raca
         public int Porte { get; set; }
@@ -31,6 +25,7 @@ namespace TddProject.Domain
         }
 
         public bool Vacinado { get; set; }
+        public Dono Dono { get; set; }
 
         // private string _nome;
         // private string _sexo;
@@ -251,10 +246,10 @@ namespace TddProject.Domain
                 mensagens.Add("Nome do cachorro é obrigatório!");
             }
 
-            if (Sexo != "Fêmea" && Sexo != "Macho")
-            {
-                mensagens.Add("Sexo do cachorro deve ser Fêmea ou Macho!");
-            }
+            // if (Sexo != "Fêmea" && Sexo != "Macho") // esta validação não é mais necessária pois transformamos o sexo em enum impedinque que exista um valor diferente na hora de selecionar o sexo, dispensando validação nesse campo
+            // {
+            //     mensagens.Add("Sexo do cachorro deve ser Fêmea ou Macho!");
+            // }
 
             if (DataNascimento > DateTime.Today)
             {

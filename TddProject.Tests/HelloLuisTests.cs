@@ -727,6 +727,17 @@ namespace TddProject.Tests
         //######################################################################################################################################//
 
 
+        //######################################################################################################################################//
+        //  *** Enum ***
+        //  Um enum ou enumeration é um tipo especial do C#, onde podemos definir um conjunto de constantes nomeadas
+        //  Internamente essas constantes sçao do tipo int
+        //  Muito útil para enriquecer o modelo da aplicação, para tipos que so podem ser unicos, como sexo, Macho ou Fêmea, 
+        //  ou uma propriedade como Departamento de uma empresa onde sua estrutura fisica e organizacional
+        //  ja possui um numero determinado e fixo de departamento, ou seja, vc é obrigado e escolhar uma das opções listadas no enum
+        //  sem a possibilidade de mudar ou alterar evitando erros de iput incorreto
+        //######################################################################################################################################//
+
+
 
     }
 
