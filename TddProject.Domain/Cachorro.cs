@@ -13,8 +13,8 @@ namespace TddProject.Domain
         public Sexo Sexo { get; set; }
               
         //public string? Raca { get; set; }
-        public Raca Raca { get; set; }//trocando o tipo da propriedade Raca de String para Classe Raca que criamos para fazer associação entre as classes cachorro e a nova classe Raca, neste momento estamos dizendo que a classe cachorro tem uma associação com a classe raca
-        public int Porte { get; set; }
+        public Raca? Raca { get; set; }//trocando o tipo da propriedade Raca de String para Classe Raca que criamos para fazer associação entre as classes cachorro e a nova classe Raca, neste momento estamos dizendo que a classe cachorro tem uma associação com a classe raca
+
         public DateTime DataNascimento { get; set; }
 
         private double? _peso;
@@ -25,7 +25,7 @@ namespace TddProject.Domain
         }
 
         public bool Vacinado { get; set; }
-        public Dono Dono { get; set; }
+        public Dono? Dono { get; set; }
 
         // private string _nome;
         // private string _sexo;

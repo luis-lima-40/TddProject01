@@ -408,7 +408,45 @@ namespace TddProject.Tests
         //  transfira a propriedade Porte do Cachorro para Classe Raca
         //  Transformar a propriedade Porte da Raca do Cachorro para um Enum
         //  Atualizar Testes Unitários e Diagrama
-        
+        // Portes: 
+        // Mini_toy_ate_6kg
+        // Pequeno_anao_6a15kg
+        // Médio_15a25kg
+        // Grande_25a45kg
+        // Gigante_acima45kg
+
+        [TestMethod]
+        public void Cachorro_Enum_Raca_Porte_Test()
+        {
+            var york = new Raca
+            {
+                Nome = "Yorkshire",
+                Porte = Porte.Pequeno_6_a_15kg
+            };
+
+            var leia = new Cachorro
+            {
+                Nome = "leia",
+                Raca = york
+            };
+
+            Console.WriteLine(leia.Raca.Porte);
+            Assert.AreEqual(Porte.Pequeno_6_a_15kg, leia.Raca.Porte);
+        }
+
+        //######################################################################################################################################//
+        //  *** Associação de Coleção ***
+        //  A orientação a Objetos permite que façamos associações com Coleções de Objetos
+        //  Eu tenho uma classe que tem uma propriedade que aponta para uma coleção de objetos de outra classe.
+        //  Podemos ter um relacionamento de M para M, muitos para muitos, atraves das associações com coleções
+        //  
+        //  exemplo, na classe dono, olando para o ponto de vista do dono, um dono pode ter varios animais
+        //  ja olhando do ponto de vista da classe Cachorro, um cachorro tem 1 dono, Sendo assim podemos representar isso
+        //  atraves de uma Associação de coleções, represente isso no Modelo.cd
+        //  na classe dono, crie uma propriedade do tipo coleção onde ele possa ter varios cachorros, exemplo lista (public List<Cachorro> Pets { get; set; })
+        //  Desta forma criamos no nosso modelo, a classe dono esta associada a uma coleção do tipo list da classe cachorro
+        //  Vamos criar uma nova classe de Testes chamada DonoTest.cs para nossos proximos testes ref. ao dono olhando da perspectiva da classe dono
+        //######################################################################################################################################//
 
 
     }
