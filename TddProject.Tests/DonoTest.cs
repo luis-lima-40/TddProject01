@@ -87,6 +87,61 @@ namespace TddProject.Tests
             //Console.WriteLine($"leia.Dono: {leia.Dono.Nome} {Environment.NewLine} Yuri.Dono: {Yuri.Dono.Nome}");
         }
 
+        //Exercicios
+        // Crie mais 2 metodos no dono para permitir adicionar e remover varios pets de uma só vez
+
+        [TestMethod]
+        public void Dono_Varios_AddPetS_Test() //sobrecarga de metodos, o mesmo metodo que aceita adicionar 1 pet por vez, voi criado novamente como sobrecarga recebendo um parametro de array que serve para adicionar varios cachorros ao mesmo tempo
+        {
+            var leia = new Cachorro { Nome = "Leia" };
+            var Yuri = new Cachorro { Nome = "Yuri" };
+            var silvia = new Dono {Nome = "Silvia" };
+
+            //var pets = new[] {leia, Yuri }; 
+            //silvia.AddPet(pets); 
+            //ao inves de declarar um array aqui vamos usar os objetos criados acima, passando um por um como parametro para a chamada do metrodo
+            // AddPet e lá na dentro da classe AddPet vamos usar o termo params  public void AddPet(params Cachorro[] pets) dessa forma o compilador entende e interpreta que esses objetos passados aqui são parametros do tipo array que esta esperando lá no metodo lá na classe
+
+            silvia.AddPet(leia, Yuri); 
+
+            Assert.AreEqual(2, silvia.Pets.Count());
+            Assert.AreEqual(silvia, leia.Dono);
+            Assert.AreEqual(silvia, Yuri.Dono);
+
+            foreach (var pet in silvia.Pets)
+            {
+                Console.WriteLine(pet.Nome);
+            }
+
+        }
+
+
+
+        [TestMethod]
+        public void Dono_Varios_RemovePet_Test()
+        {
+            var leia = new Cachorro { Nome = "Leia" };
+            var yuri = new Cachorro { Nome = "Yuri" };
+            var toby = new Cachorro { Nome = "Toby" };
+            var silvia = new Dono { Nome = "Silvia" };
+
+            silvia.AddPet(leia, yuri, toby);
+            
+            //vamos supor que vc está preenchendo um cadastro de um dono e a pessoa errou em incluir um pet, para ela remover
+            //vamos chamar o metodo RemovePet para remover o pet que foi passado erroneamente
+            silvia.RemovePet(yuri, toby );
+
+            Assert.AreEqual(1, silvia.Pets.Count());
+            Assert.AreEqual(silvia, leia.Dono);
+            Assert.AreEqual(null, yuri.Dono); // como vamos remorer o dono do yuri ele vai ficar sem dono com sua propriedade Dono nula
+            Assert.AreEqual(null, toby.Dono);
+
+            foreach (var pet in silvia.Pets)
+            {
+                Console.WriteLine(pet.Nome);
+            }
+            //Console.WriteLine($"leia.Dono: {leia.Dono.Nome} {Environment.NewLine} Yuri.Dono: {Yuri.Dono.Nome}");
+        }
 
 
     }

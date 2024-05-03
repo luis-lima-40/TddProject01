@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace TddProject.Domain
 {
@@ -28,6 +29,15 @@ namespace TddProject.Domain
 
         }
 
+        public void AddPet(params Cachorro[] pets)
+        {
+            foreach (var pet in pets)
+            {
+                AddPet(pet);
+            }
+        }
+
+
         public void RemovePet(Cachorro pet)
         {
             if (Pets == null)
@@ -37,6 +47,14 @@ namespace TddProject.Domain
                 if (Pets.Remove(pet)) // ao ececutar Pets.Remove(pet) o compilador ja executa a remoção no item da lista e retorna um true se removeu ou um false se não removeu
                 pet.Dono = null;          // então estamos pondo Pets.Remove(pet) dentro de uma condição IF que vai validar se esse termo é verdadeiro ou falso, sendo verdadeiro o if vai ser valido e vai entrar
                                           // na execução da linha abaixo. o retorno desse if é booleano então se Pets.Remove(pet) é true já vai cair na condição abaixo, ou seja ele ja removeu o pet
+        }
+
+        public void RemovePet(params Cachorro[] pets)
+        {
+            foreach (var pet in pets)
+            {
+                RemovePet(pet);
+            }
         }
     }
 
