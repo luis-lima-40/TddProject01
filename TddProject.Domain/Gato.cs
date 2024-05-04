@@ -4,21 +4,17 @@ using System.Text;
 
 namespace TddProject.Domain
 {
-    public class Gato : IPet
+    public class Gato : Animal, IPet
     {
-        public string Nome { get; set; }
-        public Sexo Sexo { get; set; }
-        public string Foto { get; set; }
-        public Dono Dono { get; set; }
-
-        public string QuantoDevoComer(int peso)
+        public string Miar(int qtdMiados)
         {
-            throw new NotImplementedException();
-        }
+            var miados = "";
 
-        public void Validar()
-        {
-            throw new NotImplementedException();
+            for (int i = 1; i <= qtdMiados; i++)
+                //          {
+                miados += "Miau! "; //apenas uma instrução no for não precisa usar abrir e fechar chaves
+                                   //          }
+            return miados.TrimEnd();
         }
     }
 }

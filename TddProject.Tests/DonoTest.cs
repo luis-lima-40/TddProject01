@@ -38,15 +38,23 @@ namespace TddProject.Tests
             //a propriedade Pets que é uma lista de cachorros
 
             var leia = new Cachorro { Nome = "Leia" };
-            var Yuri = new Cachorro { Nome = "Yuri" };
+            var yuri = new Cachorro { Nome = "Yuri" };
+            var vesgo = new Gato { Nome = "Vesgo" };
+            var mingau = new Gato { Nome = "Mingau" };
+
             var silvia = new Dono { Nome = "Silvia" }; 
 
             silvia.AddPet(leia); // vamos criar um metodo AddPet para fazer a adição de um Pet a um dono e seus respectivos atributos
-            silvia.AddPet(Yuri);
+            silvia.AddPet(yuri);
+            silvia.AddPet(vesgo);
+            silvia.AddPet(mingau);
 
-            Assert.AreEqual(2, silvia.Pets.Count());
+            Assert.AreEqual(4, silvia.Pets.Count());
             Assert.AreEqual(silvia, leia.Dono);
-            Assert.AreEqual(silvia, Yuri.Dono);
+            Assert.AreEqual(silvia, yuri.Dono);
+            Assert.AreEqual(silvia, vesgo.Dono);
+            Assert.AreEqual(silvia, mingau.Dono);
+
             //Agora que temos uma associação onde um dono tem 2 cachorros, verifique o outro lado dessa associação
             //para verificar se aquele cachorro em sua propriedade dono possui o mesmo dono que vc informou na atribuição da classe
             // os carrocho leia e Yuri devem ter a silvia como sua dona sedado na propriedade dono do cachorro,
@@ -55,10 +63,14 @@ namespace TddProject.Tests
 
             foreach (var pet in silvia.Pets)
             {
-                Console.WriteLine(pet.Nome);
+                //Console.WriteLine(pet.Nome); // use a linha abaico para pegar o nome da classe e assim saber quem é gato e quem é cachorro ou qualquer outro animal pertecente a interface IPet
+                // A interface é uma abstração de classes, então vc pode pegar o nome da classe da qual ela foi implementada.
+                Console.WriteLine($"{pet.GetType().Name} : {pet.Nome}");
+                //se vc usar o .GetType apos o nome de uma classe que foi instanciada, e pegar o atributo .Name exemplo {pet.GetType().Name} , ele irá retornar o nome da classe a qual o resultado pertence, no casso cai trazer o nome da classe gato ou cachorro que foi instanciado
             }
             //Console.WriteLine($"leia.Dono: {leia.Dono} {Environment.NewLine} Yuri.Dono: {Yuri.Dono}");
-            Console.WriteLine($"leia.Dono: {leia.Dono.Nome} {Environment.NewLine} Yuri.Dono: {Yuri.Dono.Nome}");
+            Console.WriteLine
+                ($" leia.Dono: {leia.Dono.Nome} {Environment.NewLine} yuri.Dono: {yuri.Dono.Nome} {Environment.NewLine} vesgo.Dono: {vesgo.Dono.Nome} {Environment.NewLine} mingau.Dono: {mingau.Dono.Nome}");
         }
 
 
@@ -66,23 +78,34 @@ namespace TddProject.Tests
         [TestMethod]
         public void Dono_RemovePet_Test()
         {
+            // vamos criar um metodo AddPet para fazer a adição de um Pet a um dono e seus respectivos atributos
+            //vamos supor que vc está preenchendo um cadastro de um dono e a pessoa errou em incluir um pet, para ela remover
+            //vamos chamar o metodo RemovePet para remover o pet que foi passado erroneamente
+
             var leia = new Cachorro { Nome = "Leia" };
-            var Yuri = new Cachorro { Nome = "Yuri" };
+            var yuri = new Cachorro { Nome = "Yuri" };
+            var vesgo = new Gato { Nome = "Vesgo" };
+            var mingau = new Gato { Nome = "Mingau" };
+
             var silvia = new Dono { Nome = "Silvia" };
 
             silvia.AddPet(leia); 
-            silvia.AddPet(Yuri);
-            //vamos supor que vc está preenchendo um cadastro de um dono e a pessoa errou em incluir um pet, para ela remover
-            //vamos chamar o metodo RemovePet para remover o pet que foi passado erroneamente
-            silvia.RemovePet(Yuri);
+            silvia.AddPet(yuri);
+            silvia.AddPet(vesgo);
+            silvia.AddPet(mingau);
 
-            Assert.AreEqual(1, silvia.Pets.Count());
+            silvia.RemovePet(yuri);
+            silvia.RemovePet(vesgo);
+
+            Assert.AreEqual(2, silvia.Pets.Count());
             Assert.AreEqual(silvia, leia.Dono);
-            Assert.AreEqual(null, Yuri.Dono); // como vamos remorer o dono do yuri ele vai ficar sem dono com sua propriedade Dono nula
+            Assert.AreEqual(silvia, mingau.Dono);
+            Assert.AreEqual(null, yuri.Dono); // como vamos remorer o dono do yuri ele vai ficar sem dono com sua propriedade Dono nula
+            Assert.AreEqual(null, vesgo.Dono);
 
             foreach (var pet in silvia.Pets)
             {
-                Console.WriteLine(pet.Nome);
+                Console.WriteLine($"{pet.GetType().Name} :{pet.Nome}");
             }
             //Console.WriteLine($"leia.Dono: {leia.Dono.Nome} {Environment.NewLine} Yuri.Dono: {Yuri.Dono.Nome}");
         }
@@ -94,7 +117,11 @@ namespace TddProject.Tests
         public void Dono_Varios_AddPetS_Test() //sobrecarga de metodos, o mesmo metodo que aceita adicionar 1 pet por vez, voi criado novamente como sobrecarga recebendo um parametro de array que serve para adicionar varios cachorros ao mesmo tempo
         {
             var leia = new Cachorro { Nome = "Leia" };
-            var Yuri = new Cachorro { Nome = "Yuri" };
+            var yuri = new Cachorro { Nome = "Yuri" };
+            var vesgo = new Gato { Nome = "Vesgo" };
+            var mingau = new Gato { Nome = "Mingau" };
+
+
             var silvia = new Dono {Nome = "Silvia" };
 
             //var pets = new[] {leia, Yuri }; 
@@ -102,15 +129,18 @@ namespace TddProject.Tests
             //ao inves de declarar um array aqui vamos usar os objetos criados acima, passando um por um como parametro para a chamada do metrodo
             // AddPet e lá na dentro da classe AddPet vamos usar o termo params  public void AddPet(params Cachorro[] pets) dessa forma o compilador entende e interpreta que esses objetos passados aqui são parametros do tipo array que esta esperando lá no metodo lá na classe
 
-            silvia.AddPet(leia, Yuri); 
+            silvia.AddPet(leia, yuri, vesgo, mingau); 
 
-            Assert.AreEqual(2, silvia.Pets.Count());
+            Assert.AreEqual(4, silvia.Pets.Count());
             Assert.AreEqual(silvia, leia.Dono);
-            Assert.AreEqual(silvia, Yuri.Dono);
+            Assert.AreEqual(silvia, yuri.Dono);
+            Assert.AreEqual(silvia, vesgo.Dono);
+            Assert.AreEqual(silvia, mingau.Dono);
+
 
             foreach (var pet in silvia.Pets)
             {
-                Console.WriteLine(pet.Nome);
+                Console.WriteLine($"{pet.GetType().Name} : {pet.Nome}");
             }
 
         }
@@ -123,25 +153,37 @@ namespace TddProject.Tests
             var leia = new Cachorro { Nome = "Leia" };
             var yuri = new Cachorro { Nome = "Yuri" };
             var toby = new Cachorro { Nome = "Toby" };
-            var silvia = new Dono { Nome = "Silvia" };
+            var vesgo = new Gato { Nome = "Vesgo" };
+            var mingau = new Gato { Nome = "Mingau" };
+            var magrelo = new Gato { Nome = "Magrelo" };
 
-            silvia.AddPet(leia, yuri, toby);
+
+            var silvia = new Dono { Nome = "Silvia" };
+            
+
+            silvia.AddPet(leia, yuri, toby, vesgo, mingau, magrelo);
             
             //vamos supor que vc está preenchendo um cadastro de um dono e a pessoa errou em incluir um pet, para ela remover
             //vamos chamar o metodo RemovePet para remover o pet que foi passado erroneamente
-            silvia.RemovePet(yuri, toby );
+            silvia.RemovePet(yuri, toby, mingau, magrelo );
 
-            Assert.AreEqual(1, silvia.Pets.Count());
+            Assert.AreEqual(2, silvia.Pets.Count());
             Assert.AreEqual(silvia, leia.Dono);
+            Assert.AreEqual(silvia, vesgo.Dono);
+
             Assert.AreEqual(null, yuri.Dono); // como vamos remorer o dono do yuri ele vai ficar sem dono com sua propriedade Dono nula
             Assert.AreEqual(null, toby.Dono);
+            Assert.AreEqual(null, mingau.Dono);
+            Assert.AreEqual(null, magrelo.Dono);
 
             foreach (var pet in silvia.Pets)
             {
-                Console.WriteLine(pet.Nome);
+                Console.WriteLine($"{pet.GetType().Name} : {pet.Nome}");
             }
             //Console.WriteLine($"leia.Dono: {leia.Dono.Nome} {Environment.NewLine} Yuri.Dono: {Yuri.Dono.Nome}");
         }
+
+
 
 
     }

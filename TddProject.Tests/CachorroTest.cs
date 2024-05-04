@@ -452,16 +452,14 @@ namespace TddProject.Tests
 
         //######################################################################################################################################//
         //  *** Interfaces ***
-        //  
-        //  
-        //  
-        //  
-        //  
-        //  
-        //  
-        //  
-        //  
-        //  
+        // Em resumo a interface serve como um contrato para nossas classe, nem sempre eu tenho todas as propriedades
+        // da classe na interface, mas posso obtelas com o unboxing como foi exemplificado acima pegando o atributo peso que está somente em cachorro e não está na interface
+        // conforme formos evoluindo a modelagem da aplicação e muito comum ter interfaces para representar nossas classes,
+        // abstraindo partes da nossa aplicacação atraves de interfaces para criar os contratos que vamos usar na nossa arquitetura
+        // um outro notivo ou vantagem de se ter uma interface, a partir de agora alem da classe cachorro, vamos ter
+        // uma classe de gatos, vamos criar uma classe gato, e vamos implementar a mesma interface IPet, assim o IPet, será o contrato para qualquer tipo de animal que seja um Pet, abstraindo todos os campos (atributos) que todos os pets possuem em comum entre eles.
+        // public class Gato : IPet --> o compilador pode gerar automaticamente, implementear o atributos que IPet requer na classe Gato.cs
+        // quando eu for trabalhar com atributos especificos de cachorro posso usar o unboxing para o cachorro e o mesmo para atributos especificos do gato.
         //######################################################################################################################################//
 
         [TestMethod]
@@ -487,8 +485,8 @@ namespace TddProject.Tests
             Assert.AreEqual("Leia", pet.Nome); //vamos verificar se conseguimos criar uma variavel do tipo pet com os dados que criamos uma variavel do tipo cachorro
             Console.WriteLine( pet.Nome );
 
-            //Em resumo a interface serve como um contrato para nossas classe, nem sempre eu tenho todas as propriedades
-            //da classe na interface, mas posso obtelas com o unboxing como foi exemplificado acima pegando o atributo peso que está somente em cachorro e não está na interface
+            // Em resumo a interface serve como um contrato para nossas classe, nem sempre eu tenho todas as propriedades
+            // da classe na interface, mas posso obtelas com o unboxing como foi exemplificado acima pegando o atributo peso que está somente em cachorro e não está na interface
             // conforme formos evoluindo a modelagem da aplicação e muito comum ter interfaces para representar nossas classes,
             // abstraindo partes da nossa aplicacação atraves de interfaces para criar os contratos que vamos usar na nossa arquitetura
             // um outro notivo ou vantagem de se ter uma interface, a partir de agora alem da classe cachorro, vamos ter
@@ -504,6 +502,48 @@ namespace TddProject.Tests
             //Fazer o mesmo com os parametros dos Métodos AddPet e RemovePet
 
         }
+
+
+
+
+        //######################################################################################################################################//
+        // *** HERANÇA ***
+        // 
+        // Na OO Orientação a Objetos as  classes podem ter uma relaçao de herança - 
+        // Podemos dizer que a herança é um conceito de modelagem
+        // A Herançã permite que uma classe "ficlho" herde de uma classe "Pai"
+        // 
+        // Isso Ignifica que a classe "Filho" vai ter todos os recursos da classe "Pai", mas os seus próprios recursos.
+        // Se bem Utilizada, a herança nos permite um alto grau de reutilização de codigo
+        // 
+        // vamor exemplificar, temos a classe cachorro e a classe gato e ambas as classes implementam a classe IPet
+        // Atenção nesse ponto pois Interface não é a mesma coisa que Herança,
+        // interface é uma forma de criar contratos no seu codigo quando eu falo que cachorro implementa IPet eu so digo que a classe
+        // cachorro obrigatoriamente deve ter os elementos que estao no contrato da interface IPet
+        // quando falamos de Herança vamos quebrar a estrutura da classe e vamos passar parte do codigo da estrutura da classe
+        // para uma classe Pai e isso só vale a pena ser feito se vamos ter pelo menos DOIS ou MAIS filhos dentro daquela classe PAI
+        // Cachorro e Gato tem muitos codigos repetidos falando de suas propriedades, temos em comum em ambos
+        // NOME, SEXO, FOTO, DONO, podemos abstrair isso e criar uma classe PAI chamada Animal.cs
+        // ATENÇÃO: não existe herança multipla, uma classe filho só pode herdear de 1 unica classe pai
+        // ATENÇÃO: No caso de Interfaces, uma classe pode implementar quantas interfaces forem necessários, mas uma clsse filho só implementa apenas 1 classe pai
+        // Na classe Gato.cs, ela vai herdar da classe pai Animal.cs e implementar a interface Ipet dessa forma -->  public class Gato : Animal, IPet
+        // Também podemos fazer Herança para metodos, ou seja, tanto o gato quanto o cachorro possuem em comum o metodo QuantoDevoComer e Validar
+        // a diferença é que a implementação desses metodos QuantoDevoComer e Validar são diferentes
+        // o metodo QuantoDevoComer do cachorro tem uma regra de negócio especifica para ele e essa mesma logica para o Metodo Validar, que do cachorro e gato podem ser diferentes.
+        // quando temos uma relação de herança, podemos pegar os metodos que são iguais para suas duas classes filho e jogar para a Classe pai
+        // tanto o cachorro como gato irão ganhar os dois metodos pela herança
+        // vamos falar de Virtual e de Overriide
+        // O Virtual podemos colocar nos metodos que a gente quer que os filhos herdem mas que opcionalmente eles podem sobrecarregar
+        // ou seja, sobrecarregar é implementar sua propria versão , usar a sua propria versão personalizada em sua propria classe filho.
+        // Ja o Overriide, vc coloca no seu metodo filho onde vc quer que o metodo pai seja sobrecarregado, assim vc dis ao compilador
+        // usar obrigatoriamente o metodo que está implementado no metodo filho com suas proprias regras de negócio
+        //######################################################################################################################################//
+
+        // Exercicios:
+        // Implementar o Metodo "Miar" para o Gato
+
+        // Refatorar o Método "Validar" para que as validações comuns entre gato e cachorro fiquem no Animal (Pai) e as
+        // Validações específicas fiquem nas classes do Cachorro ou do Gato
 
     }
 

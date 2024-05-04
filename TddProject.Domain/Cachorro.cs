@@ -7,12 +7,13 @@ using System.Text.RegularExpressions;
 
 namespace TddProject.Domain
 {
-    public class Cachorro : IPet
+    public class Cachorro : Animal,  IPet
     {
-        public string? Nome { get; set; } //propriedades automaticas não permitem que vc inclua comportamentos nelas, como validações, para isso vc precisa criar uma estrutura padrão de propriedade com o get / set
-        public Sexo Sexo { get; set; }
-
-        public string Foto { get; set; }
+        //herdando da classe Pai Animal, os atributos NOME, SEXO, FOTO E DONO E IMPLEMENTANDO A INTERFACE IPET
+        // public string? Nome { get; set; } //propriedades automaticas não permitem que vc inclua comportamentos nelas, como validações, para isso vc precisa criar uma estrutura padrão de propriedade com o get / set
+        // public Sexo Sexo { get; set; }
+        // public string Foto { get; set; }
+        // public Dono? Dono { get; set; }
 
         //public string? Raca { get; set; }
         public Raca? Raca { get; set; }//trocando o tipo da propriedade Raca de String para Classe Raca que criamos para fazer associação entre as classes cachorro e a nova classe Raca, neste momento estamos dizendo que a classe cachorro tem uma associação com a classe raca
@@ -27,7 +28,7 @@ namespace TddProject.Domain
         }
 
         public bool Vacinado { get; set; }
-        public Dono? Dono { get; set; }
+        
 
 
         // private string _nome;
@@ -45,8 +46,8 @@ namespace TddProject.Domain
             //throw new NotImplementedException(); // throw´significa lançar uma excessão, e uma excessão é todo erro que ocorre em nosso codigo, aqui significa que esta lancando uma nova excessão dizendo que este metodo não foi implementado ainda.. 
         }
 
-        public string QuantoDevoComer() //metodo quanto devo comer
-        {
+        public string QuantoDevoComer()  
+        {                                
 
             return "Coma no maximo 5 % do seu peso corporal, qual é seu peso?";
             //throw new NotImplementedException();
@@ -73,8 +74,8 @@ namespace TddProject.Domain
 
         //simplificando ao maximo o metodo acima, ou seja metodo para calcular 5% do peso do cachorro em gramas de Ração.
         //Aula 13.1
-        public string QuantoDevoComer(int peso)
-        {
+        public override string QuantoDevoComer(int peso)    // Ja o Overriide, vc coloca no seu metodo filho onde vc quer que o metodo pai seja sobrecarregado, assim vc dis ao compilador
+        {                                                   // usar obrigatoriamente o metodo que está implementado no metodo filho com suas proprias regras de negócio
             return $"Como tenho {peso}kg, devo comer {peso * 50}g por dia";
         }
 
@@ -236,9 +237,10 @@ namespace TddProject.Domain
         //     return mensagens.Count == 0 ? null : mensagens;
         // }
 
+
         // Refatorando o Metodo validar com tray catch e não vamos mais retornar uma lista de mensagens, vamos retornar void
-        public void Validar()
-        {
+        public override void Validar() // Ja o Overriide, vc coloca no seu metodo filho onde vc quer que o metodo pai seja sobrecarregado, assim vc dis ao compilador
+        {                     // usar obrigatoriamente o metodo que está implementado no metodo filho com suas proprias regras de negócio
             var mensagens = new List<string>();
             //regras: Nome do cachorro é obrigatório
             //if (Nome == null || Nome == "" || Nome == "  ")
