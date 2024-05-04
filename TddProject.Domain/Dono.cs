@@ -8,15 +8,17 @@ namespace TddProject.Domain
     public class Dono
     {
         public string? Nome { get; set; }
-        public string? Telefone { get; set; }
+
         public string? Email { get; set; }
 
-        public List<Cachorro>? Pets { get; set; }
+        public string? Telefone { get; set; }
 
-        public void AddPet(Cachorro pet)
+        public List<IPet> Pets { get; set; }
+
+        public void AddPet(IPet pet)
         {
             if (Pets == null)
-                Pets = new List<Cachorro>();
+                Pets = new List<IPet>();
 
             Pets.Add(pet);
             //como eu sei qual é o nome do dono desse pet que foi instanciado
@@ -29,7 +31,7 @@ namespace TddProject.Domain
 
         }
 
-        public void AddPet(params Cachorro[] pets)
+        public void AddPet(params IPet[] pets)
         {
             foreach (var pet in pets)
             {
@@ -38,7 +40,7 @@ namespace TddProject.Domain
         }
 
 
-        public void RemovePet(Cachorro pet)
+        public void RemovePet(IPet pet)
         {
             if (Pets == null)
                 return;
@@ -49,7 +51,7 @@ namespace TddProject.Domain
                                           // na execução da linha abaixo. o retorno desse if é booleano então se Pets.Remove(pet) é true já vai cair na condição abaixo, ou seja ele ja removeu o pet
         }
 
-        public void RemovePet(params Cachorro[] pets)
+        public void RemovePet(params IPet[] pets)
         {
             foreach (var pet in pets)
             {

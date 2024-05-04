@@ -14,7 +14,7 @@ namespace TddProject.Tests
         {
             var leia = new Cachorro();  //Cachorro() é o construtor da classe, aqui estamos criando um objeto da classe cashorro, declaramos uma variavel, damos um nome a esta variavel e instanciamos a classe cachorro (new)  atribuindo o retorno da classe para esta variavel to tipo chachorro chamada Leia
             var latido = leia.Latir();  //quando vc esta escrevendo um teste, vc cria metodos sem mesmo ele existir, use o intelisense para utilizar a opção do visual studio criar o metodo para vc lá dentro da sua classe
-            Console.WriteLine( latido ); //aqui estou exibindo o resuldado da variavel latido
+            Console.WriteLine(latido); //aqui estou exibindo o resuldado da variavel latido
 
             Assert.AreEqual("Au! Au!", latido);
 
@@ -29,8 +29,8 @@ namespace TddProject.Tests
         public void Leia_QuantoDevoComer_test()
         {
             var leia = new Cachorro();
-            var quantoDevoComerPeso = leia.QuantoDevoComerPeso(10);
-            Console.WriteLine( quantoDevoComerPeso );
+            var quantoDevoComerPeso = leia.QuantoDevoComer(10);
+            Console.WriteLine(quantoDevoComerPeso);
             Assert.AreEqual("Como tenho 10kg, devo comer 500g por dia", quantoDevoComerPeso);
         }
 
@@ -47,7 +47,7 @@ namespace TddProject.Tests
         public void Yuri_QuantoDevoComer_test()
         {
             var yuri = new Cachorro();
-            var quantoDevoComerMacho = yuri.QuantoDevoComerMacho(10,true);
+            var quantoDevoComerMacho = yuri.QuantoDevoComerMacho(10, true);
             Console.WriteLine(quantoDevoComerMacho);
             Assert.AreEqual(1, quantoDevoComerMacho);
         }
@@ -56,11 +56,11 @@ namespace TddProject.Tests
         public void Cachorro_Set_Get_Nome_Test()
         {
             var yuri = new Cachorro();
-            yuri.Nome="Yuri"; // o set vai gravar a string Yuri dentro do atributo nome clique em refatorar para criar no metodo SetNome na classe cachorro
+            yuri.Nome = "Yuri"; // o set vai gravar a string Yuri dentro do atributo nome clique em refatorar para criar no metodo SetNome na classe cachorro
             var nome = yuri.Nome; //o get vai buscar o valor que está gravado dentro do atributo nome
-            Console.WriteLine( nome );
+            Console.WriteLine(nome);
 
-            Assert.AreEqual("Yuri", nome );
+            Assert.AreEqual("Yuri", nome);
 
         }
 
@@ -69,7 +69,7 @@ namespace TddProject.Tests
         {
             //se o peso informado for negativo não deve gravar o Set, ele tem que ficar como 0
             var spaik = new Cachorro();
-            spaik.Peso=-1.2;
+            spaik.Peso = -1.2;
             var peso = spaik.Peso;
             Console.WriteLine(spaik.Peso);
 
@@ -80,7 +80,7 @@ namespace TddProject.Tests
 
         //Crie um atributo para identificar se o cachorro foi vacinado, usando o tipo bool
         [TestMethod]
-        public void Cachorro_Foi_Vacinado_Test() 
+        public void Cachorro_Foi_Vacinado_Test()
         {
             var thor = new Cachorro();
             var FuiVacinado = thor.FuiVacinado(true);
@@ -109,10 +109,10 @@ namespace TddProject.Tests
         }
 
         [TestMethod]
-        public void Peso_do_Cachorro_Pode_Ser_Nulo_Test() 
+        public void Peso_do_Cachorro_Pode_Ser_Nulo_Test()
         {
             var thor = new Cachorro();
-            thor.Peso=null;
+            thor.Peso = null;
             Console.WriteLine($"o peso do thor é: {thor.Peso}");
 
             Assert.AreEqual(null, thor.Peso);
@@ -131,7 +131,7 @@ namespace TddProject.Tests
             var cachorro = new Cachorro();
             cachorro.DataNascimento = new DateTime(2020, 1, 10);
 
-            var idade =  cachorro.GetIdade();
+            var idade = cachorro.GetIdade();
             // Assert.AreEqual("4 anos", idade); // como o DateTime atual não para o assert dara erro conforme o passar do tempo, vamor comentar esses asserts para não regar erro na compilação e usalo somente quando formos testar esses metodos em especifico
             Console.WriteLine($"idade: {idade}");
         }
@@ -164,7 +164,7 @@ namespace TddProject.Tests
         }
 
 
- 
+
         [TestMethod]
         public void Cachorro_GetIdade_Completa_Test() //metodo luis paga calcular anos e meses de idade GetIdadeCompleta
         {
@@ -287,7 +287,7 @@ namespace TddProject.Tests
                 {
                     Nome = "",
                     Sexo = Sexo.Macho,
-                    DataNascimento = new DateTime(2025,2,20),
+                    DataNascimento = new DateTime(2025, 2, 20),
                     Peso = 0
                 }; // ao invez de vc instanciar um objeto e preencher propriedade por propriedade manualmente, vc pode fazer uma inicilização automatica em refatorar usando Object initialization can be simplified
 
@@ -328,14 +328,14 @@ namespace TddProject.Tests
             //exemplo temos a classe chachorro, e a classe cachorro pode se relacionar com outra classe Raca,
             //ou seja a propriedade raca do cachorro pode ser outra classe, e no modelo relacional poderiamos
             //ter uma tabela cachorro e outra de raça
-            var labrador = new Raca {Nome = "Labrador" };
+            var labrador = new Raca { Nome = "Labrador" };
             var tequila = new Cachorro
             {
                 Nome = "Tequila",
                 Raca = labrador                //estamos instanciando esses objetos mas criando um vinculo entre os dois objetos, temos uma propriedade Raca na classe cachorro do Tipo da classe Raca que esta vinvulado a classe cachorro
             };
 
-            Console.WriteLine( tequila.Raca.Nome );
+            Console.WriteLine(tequila.Raca.Nome);
             Assert.AreEqual("Labrador", tequila.Raca.Nome);
         }
 
@@ -449,5 +449,63 @@ namespace TddProject.Tests
         //######################################################################################################################################//
 
 
+
+        //######################################################################################################################################//
+        //  *** Interfaces ***
+        //  
+        //  
+        //  
+        //  
+        //  
+        //  
+        //  
+        //  
+        //  
+        //  
+        //######################################################################################################################################//
+
+        [TestMethod]
+        public void Cachorro_IPet_Test()
+        {
+            // nao podemos instanciar diretamente uma interface, então vamos instanciar um cachorro que vai implementar a interface
+            // se a gente tentar atibuir o valor peso para a interfaçe IPet, vai dar erro pois a interface não tem 
+            //propriedade peso, somente a classe cachorro tem peso, nesse caso podemos utilizar o recurso chamado de
+            //Conversão boxing é o processo de conversão de um tipo de valor para o tipo object ou para qualquer tipo de interface implementada por esse tipo de valor.
+            //A conversão unboxing extrai o tipo de valor do objeto. A conversão boxing é implícita, a conversão unboxing é explícita.
+            //O conceito de conversões boxing e unboxing serve como base para a exibição unificada de C# do sistema de tipos em que um valor de qualquer tipo pode ser tratado como um objeto.
+            // em outras palavras de forma mais clara significa que o IPet ou qualquer Interface funciona como um boxing, um caixote
+            // vc pode estrair, obter a classe cahorro integralmente, com todos os seus atributos mesmo que não estejam declarados na interface
+            // para isso acontecer vamos usar o unboxing
+            // para eu recuperar o cachorro com todos os recursos (propriedades) que ele tem independente da interface faremos o seguinte
+            IPet pet = new Cachorro { Nome = "Leia", Peso = 2};
+
+            var leia = pet as Cachorro; //converter um Ipet em um Cachorro, (converter interface em classe)// a leia vai ser igual a pet, mas vc está transformando o pet igual cachorro para pegar o atributo peso que não está implementado na interface IPet
+            var thor = (Cachorro)pet;//um outro jeito que da o mesmo resultado é esta notação. converter um Ipet em um Cachorro, (converter interface em classe)
+
+
+            Assert.AreEqual(2, leia.Peso);
+            Assert.AreEqual("Leia", pet.Nome); //vamos verificar se conseguimos criar uma variavel do tipo pet com os dados que criamos uma variavel do tipo cachorro
+            Console.WriteLine( pet.Nome );
+
+            //Em resumo a interface serve como um contrato para nossas classe, nem sempre eu tenho todas as propriedades
+            //da classe na interface, mas posso obtelas com o unboxing como foi exemplificado acima pegando o atributo peso que está somente em cachorro e não está na interface
+            // conforme formos evoluindo a modelagem da aplicação e muito comum ter interfaces para representar nossas classes,
+            // abstraindo partes da nossa aplicacação atraves de interfaces para criar os contratos que vamos usar na nossa arquitetura
+            // um outro notivo ou vantagem de se ter uma interface, a partir de agora alem da classe cachorro, vamos ter
+            // uma classe de gatos, vamos criar uma classe gato, e vamos implementar a mesma interface IPet, assim o IPet, será o contrato para qualquer tipo de animal que seja um Pet, abstraindo todos os campos (atributos) que todos os pets possuem em comum entre eles.
+            // public class Gato : IPet --> o compilador pode gerar automaticamente, implementear o atributos que IPet requer na classe Gato.cs
+            // quando eu for trabalhar com atributos especificos de cachorro posso usar o unboxing para o cachorro e o mesmo para atributos especificos do gato.
+
+
+            //Interfaces, Exercícios
+
+            // Na classe Dono, mudar o tipo da propriedade Pets, de chachorro para Ipet, para permitir que um dono
+            // tenha cachorros e gatos
+            //Fazer o mesmo com os parametros dos Métodos AddPet e RemovePet
+
+        }
+
     }
+
+
 }

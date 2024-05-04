@@ -7,11 +7,13 @@ using System.Text.RegularExpressions;
 
 namespace TddProject.Domain
 {
-    public class Cachorro
+    public class Cachorro : IPet
     {
         public string? Nome { get; set; } //propriedades automaticas não permitem que vc inclua comportamentos nelas, como validações, para isso vc precisa criar uma estrutura padrão de propriedade com o get / set
         public Sexo Sexo { get; set; }
-              
+
+        public string Foto { get; set; }
+
         //public string? Raca { get; set; }
         public Raca? Raca { get; set; }//trocando o tipo da propriedade Raca de String para Classe Raca que criamos para fazer associação entre as classes cachorro e a nova classe Raca, neste momento estamos dizendo que a classe cachorro tem uma associação com a classe raca
 
@@ -26,6 +28,7 @@ namespace TddProject.Domain
 
         public bool Vacinado { get; set; }
         public Dono? Dono { get; set; }
+
 
         // private string _nome;
         // private string _sexo;
@@ -70,7 +73,7 @@ namespace TddProject.Domain
 
         //simplificando ao maximo o metodo acima, ou seja metodo para calcular 5% do peso do cachorro em gramas de Ração.
         //Aula 13.1
-        public string QuantoDevoComerPeso(int peso)
+        public string QuantoDevoComer(int peso)
         {
             return $"Como tenho {peso}kg, devo comer {peso * 50}g por dia";
         }
