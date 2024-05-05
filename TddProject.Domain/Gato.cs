@@ -16,5 +16,10 @@ namespace TddProject.Domain
                                    //          }
             return miados.TrimEnd();
         }
+
+        public override string QuantoDevoComer()
+        {
+            return $"Como tenho {Peso}kg, devo comer {Peso * 10}g por dia";// o gato como 1% do seu peso corporal / aqui ja fazemos a conversão de quilo para gramas
+        }
     }
 }

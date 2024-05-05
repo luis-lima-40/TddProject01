@@ -15,11 +15,15 @@ namespace TddProject.Domain
         Sexo Sexo { get; set; }
         String Foto { get; set; }
         Dono Dono { get; set; }
+        double? Peso { get; set; }
+    
+
+
         // fim pripriedades
 
         // Metodos - importante resaltar que a Interfaçe não pode ter nenhum tipo de implementação nos metodos
         // metodos
-        string QuantoDevoComer(int peso); //vc declara o meto e coloca o ; no final, dizendo que toda a classe que implementar a interface IPet precisa implementar os metodos aqui descritos
+        string QuantoDevoComer(); //vc declara o meto e coloca o ; no final, dizendo que toda a classe que implementar a interface IPet precisa implementar os metodos aqui descritos
         void Validar();
         // fim metodos
 

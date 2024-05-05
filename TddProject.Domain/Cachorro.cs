@@ -20,12 +20,6 @@ namespace TddProject.Domain
 
         public DateTime DataNascimento { get; set; }
 
-        private double? _peso;
-        public double? Peso 
-        {
-            get { return _peso; }
-            set { _peso = value < 0 ? _peso = 0 : _peso = value; }
-        }
 
         public bool Vacinado { get; set; }
         
@@ -46,14 +40,14 @@ namespace TddProject.Domain
             //throw new NotImplementedException(); // throw´significa lançar uma excessão, e uma excessão é todo erro que ocorre em nosso codigo, aqui significa que esta lancando uma nova excessão dizendo que este metodo não foi implementado ainda.. 
         }
 
-        public string QuantoDevoComer()  
-        {                                
-
-            return "Coma no maximo 5 % do seu peso corporal, qual é seu peso?";
-            //throw new NotImplementedException();
-
-
-        }
+        //public string QuantoDevoComer()  
+        //{                                
+        //
+        //    return "Coma no maximo 5 % do seu peso corporal, qual é seu peso?";
+        //    //throw new NotImplementedException();
+        //
+        //
+        //}
 
         //public string QuantoDevoComerPeso(int peso)
         //{
@@ -74,9 +68,9 @@ namespace TddProject.Domain
 
         //simplificando ao maximo o metodo acima, ou seja metodo para calcular 5% do peso do cachorro em gramas de Ração.
         //Aula 13.1
-        public override string QuantoDevoComer(int peso)    // Ja o Overriide, vc coloca no seu metodo filho onde vc quer que o metodo pai seja sobrecarregado, assim vc dis ao compilador
+        public override string QuantoDevoComer()   // Ja o Overriide, vc coloca no seu metodo filho onde vc quer que o metodo pai seja sobrecarregado, assim vc dis ao compilador
         {                                                   // usar obrigatoriamente o metodo que está implementado no metodo filho com suas proprias regras de negócio
-            return $"Como tenho {peso}kg, devo comer {peso * 50}g por dia";
+            return $"Como tenho {Peso}kg, devo comer {Peso * 50}g por dia";
         }
 
         public double QuantoDevoComerMacho(int peso, bool macho)
@@ -241,15 +235,19 @@ namespace TddProject.Domain
         // Refatorando o Metodo validar com tray catch e não vamos mais retornar uma lista de mensagens, vamos retornar void
         public override void Validar() // Ja o Overriide, vc coloca no seu metodo filho onde vc quer que o metodo pai seja sobrecarregado, assim vc dis ao compilador
         {                     // usar obrigatoriamente o metodo que está implementado no metodo filho com suas proprias regras de negócio
-            var mensagens = new List<string>();
+
             //regras: Nome do cachorro é obrigatório
             //if (Nome == null || Nome == "" || Nome == "  ")
             //no string existe um metodo chamado IsNullOrEmpty que é util para verificar se a variavel é varia ou nula
             //no string existe o metodo chamado IsNullOrWhiteSpace verifica se é vazio, nulo ou se tem espaço em branco
-            if (string.IsNullOrWhiteSpace(Nome)) // se for igual a vazio, nulo ou se tem espaço em branco vai retornar true neste caso a lista de mensagem vai ser preenchida
-            {
-                mensagens.Add("Nome do cachorro é obrigatório!");
-            }
+
+            // Este método de validar nome ja existe na classe Pai Animal.cs, vamos usar a Herança e comentar esse trexo, deixando aqui apenas para histórico das primeiras aulas onde não usamos a herança
+            // if (string.IsNullOrWhiteSpace(Nome)) // se for igual a vazio, nulo ou se tem espaço em branco vai retornar true neste caso a lista de mensagem vai ser preenchida
+            // {
+            //     mensagens.Add("Nome do Pet é obrigatório!");
+            // }
+
+            var mensagens = ValidacoesComuns();
 
             // if (Sexo != "Fêmea" && Sexo != "Macho") // esta validação não é mais necessária pois transformamos o sexo em enum impedinque que exista um valor diferente na hora de selecionar o sexo, dispensando validação nesse campo
             // {
@@ -267,19 +265,10 @@ namespace TddProject.Domain
                 mensagens.Add("Peso do cachorro deve ser maior que Zero!");
             }
 
-            if (mensagens.Count > 0) //
-            {
-                var exceptionMessage = "";
-                foreach (var item in mensagens)
-                {
-                    //vou pegar a variavel exceptionMessage, dizer que ela é igual a ela mesma (+= com este operador) e somar com o item da coleção e 
-                    //concatenar as mensagens de acordo com o loop, quando encontrar mensagem vai adicionar uma linha
-                    // com o pulo de linha Environment.NewLine;  
-                    exceptionMessage += item + Environment.NewLine;
-                }
-                throw new Exception(exceptionMessage);
-            }
-            
+            var ex = Helpers.ConvertStringListToException(mensagens);
+            if (ex != null)
+                throw ex;
+
         }
 
     }

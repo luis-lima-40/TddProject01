@@ -458,8 +458,8 @@ namespace TddProject.Tests
             // o For contrala o contador dentro de sua própria estrutura, não precisamos declarar o i previamente, ele ja estara na estrutura padrão do for
 
             for (var i = 0; i < array.Length; i++)
-            //{
-                Console.WriteLine(array[i] ); // como aqui temos apenas 1 linha de instrução podemos omitir as chaves
+                //{
+                Console.WriteLine(array[i]); // como aqui temos apenas 1 linha de instrução podemos omitir as chaves
             //}
         }
 
@@ -493,7 +493,7 @@ namespace TddProject.Tests
 
             foreach (var item in array) // foreach (var item in collection) vc declara a variavem e usa a palavra chave de uma determinada coleção, essa coleção no caso é nossa array, assim nossa var vai ser do tipo string conforme nosso array foi declarado implicitamente com os valores
             {
-                Console.WriteLine( item );
+                Console.WriteLine(item);
             }
         }
 
@@ -581,7 +581,7 @@ namespace TddProject.Tests
                 mensagem = "Par";
             else
                 mensagem = "Impar";
-            Console.WriteLine( mensagem );
+            Console.WriteLine(mensagem);
         }
 
         [TestMethod]
@@ -591,7 +591,7 @@ namespace TddProject.Tests
             var agora = DateTime.Now;
             var numero = agora.Second;
 
-            var mensagem = numero % 2 == 0 ? $"{numero} é Par": $"{numero} é Impar";
+            var mensagem = numero % 2 == 0 ? $"{numero} é Par" : $"{numero} é Impar";
             Console.WriteLine(mensagem);
         }
 
@@ -620,7 +620,7 @@ namespace TddProject.Tests
         [TestMethod]
         public void Switch_Case_Test()
         {
-            
+
             var hoje = DateTime.Today;
             var mensagem = "";
 
@@ -680,7 +680,7 @@ namespace TddProject.Tests
             // o recurso para tratamento de exception tray catch  faz com que seu programa não pare inesperadamente e seja exibido para o usuário que ele esta fazendo uma operação ilegal o que houve um erro sistemico.
             try
             {
-                
+
                 Cachorro cachorro = null; //aqui estamos criando uma variavel do tipo Cachorro e atribuindo Null, quando vc tentar rodar algum metodo dessa variavel vai estourar um erro
                 //aqui é um ponteiro de memoria que não aponta pra nada
                 if (cachorro == null) //Por ultimo podemos forçar o programa para ocorrer uma excessção com a vamos exemplificar isso aqui
@@ -710,9 +710,9 @@ namespace TddProject.Tests
             // um outro recurso importante do try, catch é finally
             // O finally é um bloco de codigo que vai ser executado se cair em algum catch, ele sempre será executado se der erro ou não
             // // Se o codigo no seu tray executar sem nenhum erro, com sucesso ele vai cair no Finally, se der erro, vai cair no Catch e depois no Finally também
-            finally 
+            finally
             {
-                Console.WriteLine( "Fim do Teste no bloco Finally" );
+                Console.WriteLine("Fim do Teste no bloco Finally");
             }
 
 
@@ -738,6 +738,26 @@ namespace TddProject.Tests
         //######################################################################################################################################//
 
 
+
+        // Abstração
+        //[TestMethod]
+        //public void Classe_Abstrata_Test()
+        //{
+            //var animal = new Animal(); // a classe pai Animal, foi criada pela primeira vez dessa forma public class Animal, assim, ele pode ser instanciada diretamente
+                                       // como neste exemplo desta linha de codigo, mas se mudarmos ela para abstrata public abstract class Animal ela não podera mais ser
+                                        // instanciada diretamente, somente por seus filhos, gato ou cachorro 
+                                        //assim como não podemos instanciar um objeto de uma interface também não podemos instanciar objetos de uma classe abstrata
+                                        // então qual o objetivo de ter uma classe abstrata? eu nao poderia ter apenas uma interface? 
+                                        // A DIFERENÇA entre uma INTERFACE e uma CLASSE ABSTRACT ?
+                                        // é que a interface não tem haver com a reutilização de código, ela tem haver com contratos que nossas classes são obrigadas a implementar
+                                        // A classe abstrata permite que o codigo seja reutilizado, se eu tenho a propriedade nome da classe animal, a minha classe cachorro vai ganhar a propriedade nome
+                                        // Metodos abstratos, public abstract virtual string QuantoDevoComer(int peso), quando eu faço isso
+                                        // o metodo não podera ter um conteudo, ou seja , se o metodo é abstract dentro de uma classe abstrata ele terá um
+                                        // comportamento como se fosse de uma interface, quem herdar da Classe Pai Animal.cs obrigatoriamente tem que sobrecarregar, fazer um override do metodo abstract da classe pai personalizado na classe filho
+                                        // quando vc fizer um metodo abstract em uma classe pai, note que sua classe filho vai ser obrigada a fazer o override desse metodo abstrato como no exemplo da classe gato que criamos
+                                        // QUAL A DIFERENÇA entre um MÉTODO VIRTUAL e MÉTODO ABSTRATO NA CLASSE PAI? no virtual vc tem a opção de sobrecarregar ou não com o overrride
+                                        // ja na classe abstrada, vc não terá a opção de não sobregarregar pelo contrario, vc será OBRIGADO  a sobrecarregar 
+        //}
 
     }
 

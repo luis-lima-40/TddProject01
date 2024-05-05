@@ -28,19 +28,19 @@ namespace TddProject.Tests
         [TestMethod]
         public void Leia_QuantoDevoComer_test()
         {
-            var leia = new Cachorro();
-            var quantoDevoComerPeso = leia.QuantoDevoComer(10);
-            Console.WriteLine(quantoDevoComerPeso);
-            Assert.AreEqual("Como tenho 10kg, devo comer 500g por dia", quantoDevoComerPeso);
+            var leia = new Cachorro { Peso = 10};
+            var QuantoDevoComer = leia.QuantoDevoComer();
+            Console.WriteLine(QuantoDevoComer);
+            Assert.AreEqual("Como tenho 10kg, devo comer 500g por dia", QuantoDevoComer);
         }
 
         [TestMethod]
         public void Tequila_QuantoDevoComer_test()
         {
-            var tequila = new Cachorro();
+            var tequila = new Cachorro {Peso = 30 };
             var quantoDevoComer = tequila.QuantoDevoComer();
             Console.WriteLine(quantoDevoComer);
-            Assert.AreEqual("Coma no maximo 5 % do seu peso corporal, qual é seu peso?", quantoDevoComer);
+            Assert.AreEqual("Como tenho 30kg, devo comer 1500g por dia", quantoDevoComer);
         }
 
         [TestMethod]
@@ -301,7 +301,7 @@ namespace TddProject.Tests
 
                 //não vamos poder usar o AreEqual, pois o retorno pode ter mais que uma mensagem de erro, vamos precisr
                 //usar uma variavel auxiliar com o metodo Contains();  que verifica se o texto expecifico contem no retorno do ex.Message
-                var ok = ex.Message.Contains("Nome do cachorro é obrigatório!") &&
+                var ok = ex.Message.Contains("Nome do Pet é obrigatório!") &&
                          //ex.Message.Contains("Sexo do cachorro deve ser Fêmea ou Macho!") && // transformado em enum não precisamos mais validar o sexo
                          ex.Message.Contains("Data de nascimento deve ser menor que data de hoje!") &&
                          ex.Message.Contains("Peso do cachorro deve ser maior que Zero!");
@@ -544,6 +544,48 @@ namespace TddProject.Tests
 
         // Refatorar o Método "Validar" para que as validações comuns entre gato e cachorro fiquem no Animal (Pai) e as
         // Validações específicas fiquem nas classes do Cachorro ou do Gato
+
+
+
+        //######################################################################################################################################//
+        // *** ABSTRAÇÃO - CLASSE ABSTRATA ***
+        // 
+        // Podemos declarar uma classe como sendo abstrata
+        // 
+        // Classe Abstrata não vai poder ser instanciada diretamente, e só serve para ser usada numa relação de herança
+        // basicamente para uma reutilização de código
+        // Também podemos ter métodos abstratos em uma classe classe abstrata
+        // a classe abstrata é uma forma de vc criar uma herança e impedir que a classe pai seja instanciada,
+        // somente as classes filhas poderao ser instanciadas
+        // também podemos ter metodos abstratos dentro de uma classe abstrata
+        //######################################################################################################################################//
+
+
+        //######################################################################################################################################//
+        // *** 28 - Classes e Membros Estaticos  ***
+        // 
+        // Classes Estáticas não podem ser instanciadas, são classes que não conseguimos instanciar e nao podemos criar objetos
+        // Vamos usar os recursos que ela tem sem precisar criar um Objeto da classe estatica
+        // Membros estáticos podem ser chamados diretamente através da classe estática, sem necessidade de instaciar objetos
+        // 
+        // São Muito utilizados para operações Pontuais, em rotinas de utilidades ou conversão, geralmente chamadas de Helpers (ajudantes)
+        //######################################################################################################################################//
+
+        // A classe HelloLuis é um excemplo de classe Estatica e seus menbros podem ser chamados diretamente como neste exemplo que está na classe HelloLuisTests.cs, eu chamo diretamente SayHello() sem instanciar nada --> string mensagem = HelloLuis.SayHello();
+        // vamos exemplicicar isso de ma forma melhor nos nossos metodos Validar() na Classe pai Animal e na classe filha Cachorro
+
+        //aqui temos o mesmo trecho de codigo em animal e cachorro para converter uma lista de string em uma exception para lancar essa
+        //exception no validar do animal e també no validar cachorro, ou seja podemos reutilizar esse codigo dentro de uma classe estatica
+        //camos criar uma classe no nosso Domain, chamada Helpers.cs
+             //if (mensagens.Count > 0) 
+             //{
+             //   var exceptionMessage = "";
+             //   foreach (var item in mensagens)
+             //   {
+             //       exceptionMessage += item + Environment.NewLine;
+             //   }
+             //   throw new Exception(exceptionMessage);
+             //}
 
     }
 
