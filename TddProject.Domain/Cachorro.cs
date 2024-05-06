@@ -265,7 +265,7 @@ namespace TddProject.Domain
                 mensagens.Add("Peso do cachorro deve ser maior que Zero!");
             }
 
-            var ex = Helpers.ConvertStringListToException(mensagens);
+            var ex = mensagens.ToExceptions();
             if (ex != null)
                 throw ex;
 

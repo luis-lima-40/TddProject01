@@ -2,8 +2,20 @@
 
 namespace TddProject.Domain
 {
+
+
     public static class HelloLuis //CLASSE
     {
+
+
+        //######################################################################################################################################//
+        //  *** 12 - 13 - 14 - V12, V13, V14, - Classes e objetos, Metodos e Atributos ***
+        //  
+        //
+        //  
+        //######################################################################################################################################//
+
+
         public static void PassaReferencia(Cachorro cachorro)
         {
             cachorro.Nome="Tequila";

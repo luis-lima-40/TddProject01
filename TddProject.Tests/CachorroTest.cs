@@ -313,7 +313,7 @@ namespace TddProject.Tests
         }
 
         //######################################################################################################################################//
-        //  *** Associação ***
+        //  *** 22 - V31 - Associação ***
         //  Associação na orientação a objetos, é quando uma classe 
         //  possui uma propriedade que aponta para outra classe do Modelo
         //  Seria o equivalente a chave estrangeira do modelo relacional
@@ -342,7 +342,7 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        //  *** Cass Diagram ***
+        //  *** 22.1 V31 / V32 - Class Diagram ***
         //  O Visual Studio possui uma ferramenta interessante, para vermos na forma de diagramas, o modelo das nossas classes
         //  Essa ferramenta se chama Designer de Classe
         //  Por padrão, essa funcionalidade não é instalada no Visual Studio.
@@ -379,7 +379,7 @@ namespace TddProject.Tests
         }
 
         //######################################################################################################################################//
-        //  *** Enum ***
+        //  *** 23 - V33 - Enum ***
         //  Um enum ou enumeration é um tipo especial do C#, onde podemos definir um conjunto de constantes nomeadas
         //  Internamente essas constantes sçao do tipo int
         //  Muito útil para enriquecer o modelo da aplicação, para tipos que so podem ser unicos, como sexo, Macho ou Fêmea, 
@@ -435,7 +435,7 @@ namespace TddProject.Tests
         }
 
         //######################################################################################################################################//
-        //  *** Associação de Coleção ***
+        //  *** 24 - V35 - Associação de Coleção ***
         //  A orientação a Objetos permite que façamos associações com Coleções de Objetos
         //  Eu tenho uma classe que tem uma propriedade que aponta para uma coleção de objetos de outra classe.
         //  Podemos ter um relacionamento de M para M, muitos para muitos, atraves das associações com coleções
@@ -451,7 +451,7 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        //  *** Interfaces ***
+        //  *** 25 - V37 - Interfaces ***
         // Em resumo a interface serve como um contrato para nossas classe, nem sempre eu tenho todas as propriedades
         // da classe na interface, mas posso obtelas com o unboxing como foi exemplificado acima pegando o atributo peso que está somente em cachorro e não está na interface
         // conforme formos evoluindo a modelagem da aplicação e muito comum ter interfaces para representar nossas classes,
@@ -507,7 +507,7 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        // *** HERANÇA ***
+        // *** 26 - V39 - HERANÇA ***
         // 
         // Na OO Orientação a Objetos as  classes podem ter uma relaçao de herança - 
         // Podemos dizer que a herança é um conceito de modelagem
@@ -548,7 +548,7 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        // *** ABSTRAÇÃO - CLASSE ABSTRATA ***
+        // *** 27 - V41 - ABSTRAÇÃO - CLASSE ABSTRATA ***
         // 
         // Podemos declarar uma classe como sendo abstrata
         // 
@@ -562,7 +562,7 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        // *** 28 - Classes e Membros Estaticos  ***
+        // *** 28 - V43 - Classes e Membros Estaticos  ***
         // 
         // Classes Estáticas não podem ser instanciadas, são classes que não conseguimos instanciar e nao podemos criar objetos
         // Vamos usar os recursos que ela tem sem precisar criar um Objeto da classe estatica
@@ -577,15 +577,54 @@ namespace TddProject.Tests
         //aqui temos o mesmo trecho de codigo em animal e cachorro para converter uma lista de string em uma exception para lancar essa
         //exception no validar do animal e també no validar cachorro, ou seja podemos reutilizar esse codigo dentro de uma classe estatica
         //camos criar uma classe no nosso Domain, chamada Helpers.cs
-             //if (mensagens.Count > 0) 
-             //{
-             //   var exceptionMessage = "";
-             //   foreach (var item in mensagens)
-             //   {
-             //       exceptionMessage += item + Environment.NewLine;
-             //   }
-             //   throw new Exception(exceptionMessage);
-             //}
+        //if (mensagens.Count > 0) 
+        //{
+        //   var exceptionMessage = "";
+        //   foreach (var item in mensagens)
+        //   {
+        //       exceptionMessage += item + Environment.NewLine;
+        //   }
+        //   throw new Exception(exceptionMessage);
+        //}
+
+
+
+        //######################################################################################################################################//
+        // *** 29 - V44 - Metodos de Extensão  ***
+        // 
+        // é Uma forma de extender as funcionalidades de uma classe Qualquer. Seja nossa ou de terceiros do proprios framework
+        // 
+        // Quando Criamos um método de extensão para a classe "string", por exemplo, ela "ganha" esse método adicional criado por nós
+        // 
+        // Metodos de Extensão são estáticos, obrigatoriamente devem ser estaticos por isso eles são a continuação da aula anterior sobre Classes e Membros Estaticos
+        //######################################################################################################################################//
+
+        // Exercicios 29.1 Metodos de Extensão
+        // Criar uma classe / Metodo de extensão para o Ipet
+        // Esse método deverá retornar uma string, dizendo se o Pet é um Gato ou um Cachorro
+        // Refatorar o DonoTest, usando esse novo método onde temos: pet.GetType().Name // este tipo de chamada pet.GetType().Name usa um conceito conhecido como Reflection apenas para conhecimento pois não e com Reflection que estamos trabalhando nesse momento e sim em um metodo de extenão para não usar o Reflection
+
+        //Resolução:
+        //começando pelo IPet vamos criar um metodo de extensão e estender o IPet
+        // Atenção - Metodos de extensão podem ser criados para classes e interfaces, no caso IPet é uma interface
+        // vamos criar o metodo de extensão que pega o nome da classe como esse exemplo que usamos anteriormente pet.GetType().Name}
+        // Vamos criar uma classe no Domain chada de PetExtensions.cs
+
+
+
+        //######################################################################################################################################//
+        // *** 30 - V46 - System.IO  ***
+        // 
+        // É um conjunto de recursos que vamos encontrar na Interface para trabalhar com pastas, diretórios e arquivos
+        // 
+        // Mamos Usar o HalloLuisTests
+        // 
+        // 
+        //######################################################################################################################################//
+
+
+
+
 
     }
 

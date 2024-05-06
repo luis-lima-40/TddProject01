@@ -65,7 +65,9 @@ namespace TddProject.Tests
             {
                 //Console.WriteLine(pet.Nome); // use a linha abaico para pegar o nome da classe e assim saber quem é gato e quem é cachorro ou qualquer outro animal pertecente a interface IPet
                 // A interface é uma abstração de classes, então vc pode pegar o nome da classe da qual ela foi implementada.
-                Console.WriteLine($"{pet.GetType().Name} : {pet.Nome}");
+                Console.WriteLine($"{pet.GetTipo()} : {pet.Nome}");           // pegando o nome da classe pelo metodo de extensão que criamos GetTipo
+                
+                //Console.WriteLine($"{pet.GetType().Name} : {pet.Nome}");  // pegando o nome da classe usando Reflection  
                 //se vc usar o .GetType apos o nome de uma classe que foi instanciada, e pegar o atributo .Name exemplo {pet.GetType().Name} , ele irá retornar o nome da classe a qual o resultado pertence, no casso cai trazer o nome da classe gato ou cachorro que foi instanciado
             }
             //Console.WriteLine($"leia.Dono: {leia.Dono} {Environment.NewLine} Yuri.Dono: {Yuri.Dono}");
@@ -105,7 +107,8 @@ namespace TddProject.Tests
 
             foreach (var pet in silvia.Pets)
             {
-                Console.WriteLine($"{pet.GetType().Name} :{pet.Nome}");
+                //Console.WriteLine($"{pet.GetType().Name} :{pet.Nome}"); // pegando o nome da classe usando Reflection
+                Console.WriteLine($"{pet.GetTipo()} :{pet.Nome}");   // pegando o nome da classe pelo metodo de extensão que criamos GetTipo
             }
             //Console.WriteLine($"leia.Dono: {leia.Dono.Nome} {Environment.NewLine} Yuri.Dono: {Yuri.Dono.Nome}");
         }
@@ -140,7 +143,7 @@ namespace TddProject.Tests
 
             foreach (var pet in silvia.Pets)
             {
-                Console.WriteLine($"{pet.GetType().Name} : {pet.Nome}");
+                Console.WriteLine($"{pet.GetTipo()} : {pet.Nome}");
             }
 
         }
@@ -178,7 +181,7 @@ namespace TddProject.Tests
 
             foreach (var pet in silvia.Pets)
             {
-                Console.WriteLine($"{pet.GetType().Name} : {pet.Nome}");
+                Console.WriteLine($"{pet.GetTipo()} : {pet.Nome}");
             }
             //Console.WriteLine($"leia.Dono: {leia.Dono.Nome} {Environment.NewLine} Yuri.Dono: {Yuri.Dono.Nome}");
         }

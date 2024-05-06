@@ -17,6 +17,18 @@ namespace TddProject.Tests
             Console.WriteLine(mensagem);//cw + tab é um atalho para Console.WriteLine...  neste  teste vai dar errado pq no meu metrodo está retornando uma string vazia, quando eu preencher no meu metodo a mesma string que eu declarei aqui como string esperada ai sim o teste vai dar OK
         }
 
+
+
+
+        //######################################################################################################################################//
+        //  *** 16 - V20 - Tipos - Tipos Explicitos, Implicitos e Nuláveis ***
+        //
+        //
+        //######################################################################################################################################//
+
+
+
+
         [TestMethod]
         public void Tipos_Primitivos_e_Complexos_Test()
         {
@@ -219,8 +231,8 @@ namespace TddProject.Tests
         }
 
         //######################################################################################################################################//
-        //  ***Níveis de Vusibilidade***
-        //  Niveis de acesso de uma classe e seus membros
+        //  *** 17 - V22 - Atributos de Vusibilidade***
+        //  Níveis de Vusibilidade / Niveis de acesso de uma classe e seus membros
         //
         //  class
         //  public: Classe publica pode ser acessada de qualquer parte do nosso codigo, dentro ou fora do seu assembli original
@@ -254,7 +266,7 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        //  ***DateTime***
+        //  *** - 19 - V25 DateTime***
         //  Classe do .Net com recursos para representar e manipular datas e horas
         //
         //  
@@ -363,7 +375,7 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        //  ***TimeSpan***
+        //  ***- 19 - V25 TimeSpan***
         //  Classe do .Net que representa uma "quantidade de tempo"
         //  para trabalhar com calculos entre dadas e horas
         //  
@@ -404,7 +416,7 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        //  *** Array / List / While / FOR / LOOPS E CONDIÇÕES ***
+        //  *** 20 - V27 - Array / List / While / FOR / LOOPS E CONDIÇÕES ***
         //  Um array é um elemento de um determinado tipo, sendo uma estrutura estatica, fixa limitada a um tipo unico, não é possivel misturar string e inteiro por exemplo, ou uma vez que vc determina as posição vc não cosegue em tempo de execução eliminar ou incluir posições
         //  List
         //  
@@ -668,7 +680,7 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        //  *** Exceptions ***
+        //  *** 21 - V29 Exceptions ***
         //  Exception é um erro ou problema que ocorre durante a execução de um programa
         //  o C# nos permite fazer o tratamento de exceptions
         //  temos uma série de ferramentas para trabalhar com exceptions, veremos algumas delas
@@ -719,7 +731,7 @@ namespace TddProject.Tests
         }
 
         //######################################################################################################################################//
-        //  *** Associação ***
+        //  *** 22 - V31 - Associação ***
         //  Associação na orientação a objetos, é quando uma classe 
         //  possui uma propriedade que aponta para outra classe do Modelo
         //  Seria o equivalente a chave estrangeira do modelo relacional
@@ -728,7 +740,7 @@ namespace TddProject.Tests
 
 
         //######################################################################################################################################//
-        //  *** Enum ***
+        //  *** 23 - V33 - Enum ***
         //  Um enum ou enumeration é um tipo especial do C#, onde podemos definir um conjunto de constantes nomeadas
         //  Internamente essas constantes sçao do tipo int
         //  Muito útil para enriquecer o modelo da aplicação, para tipos que so podem ser unicos, como sexo, Macho ou Fêmea, 
@@ -743,21 +755,114 @@ namespace TddProject.Tests
         //[TestMethod]
         //public void Classe_Abstrata_Test()
         //{
-            //var animal = new Animal(); // a classe pai Animal, foi criada pela primeira vez dessa forma public class Animal, assim, ele pode ser instanciada diretamente
-                                       // como neste exemplo desta linha de codigo, mas se mudarmos ela para abstrata public abstract class Animal ela não podera mais ser
-                                        // instanciada diretamente, somente por seus filhos, gato ou cachorro 
-                                        //assim como não podemos instanciar um objeto de uma interface também não podemos instanciar objetos de uma classe abstrata
-                                        // então qual o objetivo de ter uma classe abstrata? eu nao poderia ter apenas uma interface? 
-                                        // A DIFERENÇA entre uma INTERFACE e uma CLASSE ABSTRACT ?
-                                        // é que a interface não tem haver com a reutilização de código, ela tem haver com contratos que nossas classes são obrigadas a implementar
-                                        // A classe abstrata permite que o codigo seja reutilizado, se eu tenho a propriedade nome da classe animal, a minha classe cachorro vai ganhar a propriedade nome
-                                        // Metodos abstratos, public abstract virtual string QuantoDevoComer(int peso), quando eu faço isso
-                                        // o metodo não podera ter um conteudo, ou seja , se o metodo é abstract dentro de uma classe abstrata ele terá um
-                                        // comportamento como se fosse de uma interface, quem herdar da Classe Pai Animal.cs obrigatoriamente tem que sobrecarregar, fazer um override do metodo abstract da classe pai personalizado na classe filho
-                                        // quando vc fizer um metodo abstract em uma classe pai, note que sua classe filho vai ser obrigada a fazer o override desse metodo abstrato como no exemplo da classe gato que criamos
-                                        // QUAL A DIFERENÇA entre um MÉTODO VIRTUAL e MÉTODO ABSTRATO NA CLASSE PAI? no virtual vc tem a opção de sobrecarregar ou não com o overrride
-                                        // ja na classe abstrada, vc não terá a opção de não sobregarregar pelo contrario, vc será OBRIGADO  a sobrecarregar 
+        //var animal = new Animal(); // a classe pai Animal, foi criada pela primeira vez dessa forma public class Animal, assim, ele pode ser instanciada diretamente
+        // como neste exemplo desta linha de codigo, mas se mudarmos ela para abstrata public abstract class Animal ela não podera mais ser
+        // instanciada diretamente, somente por seus filhos, gato ou cachorro 
+        //assim como não podemos instanciar um objeto de uma interface também não podemos instanciar objetos de uma classe abstrata
+        // então qual o objetivo de ter uma classe abstrata? eu nao poderia ter apenas uma interface? 
+        // A DIFERENÇA entre uma INTERFACE e uma CLASSE ABSTRACT ?
+        // é que a interface não tem haver com a reutilização de código, ela tem haver com contratos que nossas classes são obrigadas a implementar
+        // A classe abstrata permite que o codigo seja reutilizado, se eu tenho a propriedade nome da classe animal, a minha classe cachorro vai ganhar a propriedade nome
+        // Metodos abstratos, public abstract virtual string QuantoDevoComer(int peso), quando eu faço isso
+        // o metodo não podera ter um conteudo, ou seja , se o metodo é abstract dentro de uma classe abstrata ele terá um
+        // comportamento como se fosse de uma interface, quem herdar da Classe Pai Animal.cs obrigatoriamente tem que sobrecarregar, fazer um override do metodo abstract da classe pai personalizado na classe filho
+        // quando vc fizer um metodo abstract em uma classe pai, note que sua classe filho vai ser obrigada a fazer o override desse metodo abstrato como no exemplo da classe gato que criamos
+        // QUAL A DIFERENÇA entre um MÉTODO VIRTUAL e MÉTODO ABSTRATO NA CLASSE PAI? no virtual vc tem a opção de sobrecarregar ou não com o overrride
+        // ja na classe abstrada, vc não terá a opção de não sobregarregar pelo contrario, vc será OBRIGADO  a sobrecarregar 
         //}
+
+
+
+
+        //######################################################################################################################################//
+        // *** 30 - V46 - System.IO  (input, output)*** 
+        // 
+        // É um conjunto de recursos que vamos encontrar na Interface para trabalhar com pastas, diretórios e arquivos
+        //
+        // No .NET, os namespaces System.IO contêm tipos que permitem a leitura e a gravação, tanto de forma síncrona quanto assíncrona,
+        // em fluxos de dados e arquivos. Esses namespaces também contêm tipos que realizam compactação e descompactação em arquivos e 
+        // tipos que permitem a comunicação por meio de pipes e portas seriais.
+        // 
+        // Mamos Usar o HalloLuisTests
+        //  
+        //######################################################################################################################################//
+
+        [TestMethod]
+        public void SystemIO_CriateDirectory_Test()
+        {
+            // criando diretorios com System.IO
+            // Directory é uma classe estatica com elementos estaticos
+            //C: \Users\CorteStiloTatuape\Documents\Luis Lima\01_LUIS_ESTUDOS_2024\TDD - Tests\TddProject01
+            // em C# uma barra para esquerda é um caracter de escape, para vc colocar algum carater especial, por exemplo
+            // se vc quiser imprimir em tela na sua string uma "  voce pode colocar o \" e o compilador vai mostar as aspas no resultado da string
+            // para vc criar ou acessar um diterorio dentro de uma string, o caracter especial para representar a barra é jusatamente usar
+            // a basse de caracter de escape \ e na sequencia outra barra, ficando assim \\ (C:\\Users\\)
+            // se a pasta ja existir o CreateDirectory vai ignorar o comando, não vai estourar nenhum erro e nao fara nada
+            // se não existir ele irá criar o diretorio ou subpasta
+
+            Directory.CreateDirectory("C:\\Users\\CorteStiloTatuape\\Documents\\Luis Lima\\01_LUIS_ESTUDOS_2024\\TDD-Tests\\TddProject01\\Aula030");
+            Directory.CreateDirectory("C:\\Users\\CorteStiloTatuape\\Documents\\Luis Lima\\01_LUIS_ESTUDOS_2024\\TDD-Tests\\TddProject01\\Aula030\\SubPasta");
+            //Directory.Delete("C:\\Users\\CorteStiloTatuape\\Documents\\Luis Lima\\01_LUIS_ESTUDOS_2024\\TDD-Tests\\TddProject01\\Aula030\\SubPasta");
+            //Directory.Delete("C:\\Users\\CorteStiloTatuape\\Documents\\Luis Lima\\01_LUIS_ESTUDOS_2024\\TDD-Tests\\TddProject01\\Aula030");
+
+            //Directory.CreateDirectory("C:\\Users\\CorteStiloTatuape\\Documents\\Luis Lima\\01_LUIS_ESTUDOS_2024\\TDD-Tests\\Aula030");
+            //Directory.CreateDirectory("C:\\Users\\CorteStiloTatuape\\Documents\\Luis Lima\\01_LUIS_ESTUDOS_2024\\TDD-Tests\\Aula030\\SubPasta");
+        }
+
+
+
+        [TestMethod]
+        public void SystemIO_File_Create_Txt_Test()
+        {
+            // A classe File vc também acessa varios metodos estaticos e muitos começam com Write 
+            // metodos que iniciam com  Write permitem criar arquivos com um determinado path (caminho) com um determinado conteudo
+            // o mais comum é a gente usar o WriteAllBytes que é um array de bytes, um binário que estamos querendo gravar em disco
+            // vamos criar um arquivo que grava texto, um mais simples para exemplificar usando o WriteAllText
+
+            // WriteAllText no pripeiro parametro coloque o caminho do arquivo onde irá criar sequido do nomeDoArquivo.txt, no segundo parametro, coloque o conteudo do arquivo que será uma string qualquer
+            File.WriteAllText("C:\\Users\\CorteStiloTatuape\\Documents\\Luis Lima\\01_LUIS_ESTUDOS_2024\\TDD-Tests\\TddProject01\\Aula030\\Hello.txt", "Hello Desenvolvedor");
+        }
+
+        [TestMethod]
+        public void SystemIO_GetFileSystemEntries_Test()
+        {
+            // GetFileSystemEntries - Carregar o conteúdo de um diretório
+            // GetFileSystemEntries vai retornar uma lista, um array de strings contendo todos os itens que tem em um diretório
+            // ele faz parte do Directory.GetFileSystemEntries
+            // 
+
+            // 
+            var lista = Directory.GetFileSystemEntries("C:\\Users\\CorteStiloTatuape\\Documents\\Luis Lima\\01_LUIS_ESTUDOS_2024\\TDD-Tests\\TddProject01\\Aula030");
+            foreach (var item in lista)
+            {
+                Console.WriteLine($"Lista: {item}");
+            }
+        }
+
+
+        [TestMethod]
+        public void SystemIO_File_Read_Txt_Test()
+        {
+            // Ler o conteudo de um arquivo
+            // 
+            // 
+            // 
+
+            // 
+            var conteudo = File.ReadAllText("C:\\Users\\CorteStiloTatuape\\Documents\\Luis Lima\\01_LUIS_ESTUDOS_2024\\TDD-Tests\\TddProject01\\Aula030\\Hello.txt");
+
+                Console.WriteLine($"conteudo arquivo: {conteudo}");
+        }
+
+        // Exercícios *** 30.1 - V46 - System.IO(input, output)***
+        // Criar uma rotina que devera ler o conteudo do arquivo pets.csv, e retornar um Lis<Ipet>,
+        // contendo todos os animais que estão nessa lista
+        //
+        // Criar um teste unitário para listar no console todos os pets dessa Lista
+        // arquivo csv "C:\\Users\\CorteStiloTatuape\\Documents\\Luis Lima\\01_LUIS_ESTUDOS_2024\\TDD-Tests\\TddProject01\\Aula030\\pets.csv"
+        // continue no arquito de teste PetTest.cs
+
+
 
     }
 

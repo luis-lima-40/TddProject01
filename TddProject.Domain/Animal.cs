@@ -35,25 +35,43 @@ namespace TddProject.Domain
 
 
 
-        public virtual void Validar() // O Virtual podemos colocar nos metodos que a gente quer que os filhos herdem mas que opcionalmente eles podem sobrecarregar
-        {
-            var mensagens = ValidacoesComuns();// neste ponto do meu codigo, ele vai chamar o metodo acima, caso tenha alguma mensagem de erro ele vai retornar para este ponto e contimuar daqui pra baixo exibindo o erro enancando um throw new Exception para a classe que chamou o metodo validar
+        // public virtual void Validar() // O Virtual podemos colocar nos metodos que a gente quer que os filhos herdem mas que opcionalmente eles podem sobrecarregar
+        // {
+        //     var mensagens = ValidacoesComuns();// neste ponto do meu codigo, ele vai chamar o metodo acima, caso tenha alguma mensagem de erro ele vai retornar para este ponto e contimuar daqui pra baixo exibindo o erro enancando um throw new Exception para a classe que chamou o metodo validar
+        // 
+        //     var ex = Helpers.ConvertStringListToException(mensagens);
+        //     if (ex != null)
+        //         throw ex;
+        // 
+        //     // if (mensagens.Count > 0) 
+        //     // {
+        //     //     var exceptionMessage = "";
+        //     //     foreach (var item in mensagens)
+        //     //     {
+        //     //         exceptionMessage += item + Environment.NewLine;
+        //     //     }
+        //     //     throw new Exception(exceptionMessage);
+        //     // }
+        // }
 
-            var ex = Helpers.ConvertStringListToException(mensagens);
+        public virtual void Validar() 
+        {
+            var mensagens = ValidacoesComuns();
+            //var ex = Helpers.ConvertStringListToException(mensagens);
+            // vamos imaginar que eu quisesse fazer essa mensagem de forma diferente usanto um metodo de
+            // extensão criado por mim chamado de ToExceptions(); vamos fazer uma extensão do objeto List do tipo string
+            // do framework List<string> para isso vamos colocar a palavra chave 'this' na frente do List,
+            // lembrando que a classe deve ser static, vamos criar isso lá na classe Helpers.cs
+            // no método  public static Exception ConvertStringListToException(List<string> mensagens) passará a ser
+            //public static Exception ConvertStringListToException(this List<string> mensagens)
+            //fazendo o passo acima, verifique agora que aqui no metodo mensagens e colocar um '.' vc vera o metodo de extensão ToExceptions()
+
+            var ex = mensagens.ToExceptions();
+
             if (ex != null)
                 throw ex;
 
-            // if (mensagens.Count > 0) 
-            // {
-            //     var exceptionMessage = "";
-            //     foreach (var item in mensagens)
-            //     {
-            //         exceptionMessage += item + Environment.NewLine;
-            //     }
-            //     throw new Exception(exceptionMessage);
-            // }
         }
-
 
 
     }
